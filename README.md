@@ -1,40 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# サービス概要
 
-## Getting Started
+英単語を元にAIで英文を生成して翻訳することで英単語の使い方を学習するサービスです。
 
-First, run the development server:
+## なぜ開発するか
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+TOEICの勉強中に知らない英単語を効率よく覚えたいと考えました。英単語をまとめて英文にし、翻訳することで効率よく学習できるのではないかと考えました。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## どのように解決するか
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+複数の英単語を使ってAIに例文を生成するサービスを提供します。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## メイン機能
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Top
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **キャッチコピー**の表示
+- **アプリの使用場面**の紹介
+- **紹介動画**（後回し）
 
-## Learn More
+## 英文機能
 
-To learn more about Next.js, take a look at the following resources:
+- **英文作成機能**: 英単語(熟語)を使った問題を作成。複数の英単語を選択し、難易度（TOEIC基準と学生基準）、テーマ、トピックを選択して英文を作成
+- **例文集機能**: 作成した英文の一覧表示と詳細表示。単語の詳細モーダル、いいね、削除、メモ、後で解くなどのチェック機能
+- **例文翻訳機能**: 作成した英文の翻訳。AIが生成した日本語とユーザーが書いた和訳を比較してスコアを作る。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ユーザー設定
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **ユーザー設定機能**: ユーザー情報、退会、ログアウト
+- **サブスクリプション機能**: Stripeで実装予定
 
-## Deploy on Vercel
+## 開発の流れ
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. 要件定義
+2. Figma
+3. ER図
+4. 環境構築
+5. MSWを使ったフロントエンド開発、テスト作成、デモ版作成
+6. 非同期処理実装
+7. 完成
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 後回しにしてもいい機能
+
+- emailとpasswordのログイン機能 (Googleで事足りる場合)
+- パスワード再設定機能
+- 退会機能
+- Githubの草を表示する機能
+- 英文一覧に絞り込み機能 (利用者が増えたら追加)
+- サブスク機能 (Stripeなど)
