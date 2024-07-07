@@ -27,26 +27,21 @@ export default function Home() {
 			</h2>
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={student} alt="student" width={300} height={300} />
+					<Image src={student} alt="student" height={300} />
 					<p className="text-center my-2 text-gray-400">
 						試験勉強や日々の学習に
 					</p>
 				</div>
 				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={developer} alt="developer" width={350} height={150} />
+					<Image src={developer} alt="developer" height={300} />
 					<p className="text-center text-gray-400">コードの読解力の向上に</p>
 				</div>
 				<div className="flex flex-col items-center justify-between h-80">
-					<Image
-						src={communication}
-						alt="communication"
-						width={350}
-						height={150}
-					/>
+					<Image src={communication} alt="communication" height={300} />
 					<p className="text-center text-gray-400">異文化交流に</p>
 				</div>
 				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={video} alt="video" width={350} height={150} />
+					<Image src={video} alt="video" height={300} />
 					<p className="text-center text-gray-400">
 						海外ドラマが聞き取れるように
 					</p>

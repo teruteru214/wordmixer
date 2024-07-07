@@ -22,7 +22,7 @@ const Footer = () => {
 				</menu>
 			</div>
 			<div className="flex justify-center my-3">
-				<Image src={logo} alt="logo" width={240} height={80} />
+				<Image src={logo} alt="logo" height={50} />
 			</div>
 			<p className="text-xs sm:text-base text-center text-gray-400 mb-3">
 				@2024 VocabPractice All Rights
