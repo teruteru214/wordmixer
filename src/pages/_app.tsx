@@ -1,3 +1,4 @@
+import Footer from "@/components/Layout/Footer";
 import LoginHeader from "@/components/Layout/LoginHeader";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
 		<main className={roboto.className}>
 			<LoginHeader />
 			<Component {...pageProps} />
+			<Footer />
 		</main>
 	);
 }
