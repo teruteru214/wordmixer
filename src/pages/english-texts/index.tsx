@@ -1,7 +1,6 @@
 import type { TextsProps } from "@/types/text";
 import { IconUsersGroup } from "@tabler/icons-react";
 import type { GetServerSideProps } from "next";
-import {} from "react";
 import FilterTexts from "./components/FilterTexts";
 
 export default function EnglishTexts({ texts }: TextsProps) {
