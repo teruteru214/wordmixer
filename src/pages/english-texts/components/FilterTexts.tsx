@@ -6,21 +6,21 @@ import Image from "next/image";
 import { useState } from "react";
 import TextCard from "./TextCard";
 
-const FilterTexts = ({ texts }: TextsProps) => {
+const FilterTexts = ({ texts = [] }: TextsProps) => {
 	const [filter, setFilter] = useState("");
-	const [filteredTexts, setFilteredTexts] = useState<TextProps["text"][]>(
-		texts || [],
-	);
+	const [filteredTexts, setFilteredTexts] =
+		useState<TextProps["text"][]>(texts);
 
 	const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.toLowerCase();
 		setFilter(value);
 
-		const filtered = (texts || []).filter(
+		const filtered = texts.filter(
 			(text) =>
-				text.english.toLowerCase().includes(value) ||
-				text.level.toLowerCase().includes(value) ||
-				text.theme.toLowerCase().includes(value),
+				text &&
+				(text.english.toLowerCase().includes(value) ||
+					text.level.toLowerCase().includes(value) ||
+					text.theme.toLowerCase().includes(value)),
 		);
 		setFilteredTexts(filtered);
 	};
@@ -33,7 +33,9 @@ const FilterTexts = ({ texts }: TextsProps) => {
 				onChange={handleFilterChange}
 			/>
 			{filteredTexts.length > 0 ? (
-				filteredTexts.map((text) => <TextCard key={text?.id} text={text} />)
+				filteredTexts.map(
+					(text) => text && <TextCard key={text.id} text={text} />,
+				)
 			) : (
 				<div className="my-28">
 					<div className="flex justify-center">
