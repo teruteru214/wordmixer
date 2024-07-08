@@ -16,7 +16,7 @@ const LoginHeader = () => {
 	return (
 		<header className="border-b border-gray-200 p-2">
 			<div className="flex justify-end items-center">
-				<Image src={logo} alt="logo" width={150} height={50} />
+				<Image src={logo} alt="logo" height={30} />
 				<div className="ml-auto">
 					<Drawer>
 						<DrawerTrigger>
@@ -24,7 +24,7 @@ const LoginHeader = () => {
 						</DrawerTrigger>
 						<DrawerContent>
 							<DrawerHeader className="flex justify-between items-center">
-								<Image src={logo} alt="logo" width={150} height={37} />
+								<Image src={logo} alt="logo" height={30} />
 								<DrawerClose className="ml-auto">
 									<IconX className="w-8 h-8" />
 								</DrawerClose>
