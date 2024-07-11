@@ -1,10 +1,10 @@
-import { Badge } from "@/components/Ui/Badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/Ui/Card";
+import { Card } from "@/components/Ui/Card";
 import { Checkbox } from "@/components/Ui/Checkbox";
 
 import type { TextProps } from "@/types/text";
 
 import {
+	IconEdit,
 	IconLanguageHiragana,
 	IconThumbUp,
 	IconTrash,
@@ -12,29 +12,27 @@ import {
 
 export default function TextCard({ text }: TextProps) {
 	return (
-		<Card className="my-4">
-			<CardHeader>
-				<CardTitle>{text?.english}</CardTitle>
-			</CardHeader>
+		<Card className="space-y-1 p-2 text-gray-400 text-sm">
+			<div className="flex flex-wrap gap-2 overflow-hidden">
+				<div className="truncate">
+					{text?.words.map((word) => `#${word}`).join(" ")}
+				</div>
+			</div>
+			<p>{text?.level}</p>
+			<p>{text?.theme}</p>
 			<hr />
-			<CardContent className="space-y-1">
-				<div className="flex flex-wrap gap-2 mt-2 text-gray-400">
-					{text?.words.map((word) => (
-						<Badge key={word}>{word}</Badge>
-					))}
+			<div className="flex items-center justify-between gap-2">
+				<div className="flex items-center gap-2">
+					<Checkbox id={`terms-${text?.id}`} />
+					<label htmlFor={`terms-${text?.id}`}>あとで翻訳</label>
 				</div>
-				<p className="text-sm text-gray-400">{text?.level}</p>
-				<div className="flex items-center justify-between text-gray-400 text-sm">
-					<p>{text?.theme}</p>
-					<div className="flex items-center space-x-2">
-						<Checkbox id={`terms-${text?.id}`} />
-						<label htmlFor={`terms-${text?.id}`}>あとで翻訳</label>
-						<IconLanguageHiragana className="w-5 h-5 text-gray-400" />
-						<IconThumbUp className="w-5 h-5 text-gray-400" />
-						<IconTrash className="w-5 h-5 text-gray-400" />
-					</div>
+				<div className="flex items-center gap-2 ml-auto">
+					<IconLanguageHiragana className="w-5 h-5 text-gray-400" />
+					<IconEdit className="w-5 h-5 text-gray-400" />
+					<IconThumbUp className="w-5 h-5 text-gray-400" />
+					<IconTrash className="w-5 h-5 text-gray-400" />
 				</div>
-			</CardContent>
+			</div>
 		</Card>
 	);
 }
