@@ -1,5 +1,13 @@
 import { Button } from "@/components/Ui/Button";
 import { Input } from "@/components/Ui/Input";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/Ui/Select";
 import ai from "@/public/ai.webp";
 import type { TextProps, TextsProps } from "@/types/text";
 import Image from "next/image";
@@ -15,27 +23,38 @@ const FilterTexts = ({ texts = [] }: TextsProps) => {
 		const value = e.target.value.toLowerCase();
 		setFilter(value);
 
-		const filtered = texts.filter(
-			(text) =>
-				text &&
-				(text.english.toLowerCase().includes(value) ||
-					text.level.toLowerCase().includes(value) ||
-					text.theme.toLowerCase().includes(value)),
+		const filtered = texts.filter((text) =>
+			text.words.some((word) => word.toLowerCase().includes(value)),
 		);
 		setFilteredTexts(filtered);
 	};
 
 	return (
-		<>
-			<Input
-				placeholder="英単語、難易度、テーマなど絞り込めます"
-				value={filter}
-				onChange={handleFilterChange}
-			/>
+		<search>
+			<div className="flex space-x-2">
+				<Input
+					placeholder="英単語で絞り込めます"
+					value={filter}
+					onChange={handleFilterChange}
+				/>
+				<Select defaultValue="japanese">
+					<SelectTrigger className="w-[180px]">
+						<SelectValue placeholder="Select a language" />
+					</SelectTrigger>
+					<SelectContent>
+						<SelectGroup>
+							<SelectItem value="japanese">和訳</SelectItem>
+							<SelectItem value="english">英訳</SelectItem>
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+			</div>
 			{filteredTexts.length > 0 ? (
-				filteredTexts.map(
-					(text) => text && <TextCard key={text.id} text={text} />,
-				)
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
+					{filteredTexts.map(
+						(text) => text && <TextCard key={text.id} text={text} />,
+					)}
+				</div>
 			) : (
 				<div className="my-28">
 					<div className="flex justify-center">
@@ -54,7 +73,7 @@ const FilterTexts = ({ texts = [] }: TextsProps) => {
 					</Button>
 				</div>
 			)}
-		</>
+		</search>
 	);
 };
 
