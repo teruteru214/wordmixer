@@ -1,3 +1,4 @@
+import { Badge } from "@/components/Ui/Badge";
 import { Button } from "@/components/Ui/Button";
 import {
 	Form,
@@ -7,25 +8,31 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/Ui/Form";
-import { Input } from "@/components/Ui/Input";
+
 import { Label } from "@/components/Ui/Label";
 import { RadioGroup, RadioGroupItem } from "@/components/Ui/RadioGroup";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconX } from "@tabler/icons-react";
+import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { InputWithEnter } from "./InputWithEnter";
 
 const formSchema = z.object({
 	words: z
-		.array(z.string())
+		.array(
+			z.string().regex(/^[a-zA-Z]+$/, { message: "英文字のみ入力できます" }),
+		)
 		.min(1, { message: "英単語を入力してください" })
 		.max(5, { message: "英単語は５つまで選択できます" }),
-	level: z.string(),
-	theme: z.string(),
+	level: z.string().nonempty({ message: "難易度を選択してください" }),
+	theme: z.string().nonempty({ message: "テーマを選択してください" }),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
 const TextForm = () => {
+	const [wordList, setWordList] = useState<string[]>([]);
 	const form = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -39,20 +46,53 @@ const TextForm = () => {
 		console.log(data);
 	};
 
+	const handleEnter = (word: string) => {
+		const isValidWord = /^[a-zA-Z]+$/.test(word);
+		if (!isValidWord) {
+			return;
+		}
+		if (wordList.length >= 5) {
+			return;
+		}
+		if (wordList.includes(word)) {
+			return;
+		}
+		const newWordList = [...wordList, word];
+		setWordList(newWordList);
+		form.setValue("words", newWordList);
+	};
+
+	const handleRemoveWord = (word: string) => {
+		const newWordList = wordList.filter((w) => w !== word);
+		setWordList(newWordList);
+		form.setValue("words", newWordList);
+	};
+
 	return (
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
 				<FormField
 					name="words"
 					control={form.control}
-					render={({ field }) => (
+					render={() => (
 						<FormItem>
-							<FormLabel htmlFor="words" className="text-lg">
+							<FormLabel htmlFor="words" className="text-lg flex items-center">
 								使用する英単語を入力してください(5つまで)
 							</FormLabel>
 							<FormControl>
-								<Input id="words" {...field} />
+								<InputWithEnter id="words" onEnter={handleEnter} />
 							</FormControl>
+							<ul className="flex space-x-2 mt-2">
+								{wordList.map((word) => (
+									<Badge key={word} className="text-sm flex items-center">
+										{word}
+										<IconX
+											className="w-4 h-4 ml-1 cursor-pointer"
+											onClick={() => handleRemoveWord(word)}
+										/>
+									</Badge>
+								))}
+							</ul>
 							<FormMessage />
 						</FormItem>
 					)}
