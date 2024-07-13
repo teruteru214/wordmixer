@@ -1,6 +1,7 @@
 import { Badge } from "@/components/Ui/Badge";
 import { Input as BaseInput } from "@/components/Ui/Input";
 import { cn } from "@/lib/utils";
+import words from "an-array-of-english-words"; // インポート
 import React, { useState } from "react";
 
 export interface InputWithEnterProps
@@ -11,6 +12,9 @@ export interface InputWithEnterProps
 const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
 	({ className, onEnter, ...props }, ref) => {
 		const [inputValue, setInputValue] = useState("");
+		const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>(
+			[],
+		);
 
 		const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 			if (e.key === "Enter") {
@@ -21,14 +25,40 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
 		};
 
 		const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-			setInputValue(e.target.value);
+			const value = e.target.value;
+			setInputValue(value);
+			if (value) {
+				const filtered = words
+					.filter((word) => word.toLowerCase().startsWith(value.toLowerCase()))
+					.slice(0, 10);
+				setFilteredSuggestions(filtered);
+			} else {
+				setFilteredSuggestions([]);
+			}
+		};
+
+		const handleSuggestionClick = (word: string) => {
+			onEnter(word);
+			setInputValue("");
+			setFilteredSuggestions([]);
+		};
+
+		const handleSuggestionKeyDown = (
+			e: React.KeyboardEvent<HTMLButtonElement>,
+			word: string,
+		) => {
+			if (e.key === "Enter" || e.key === " ") {
+				onEnter(word);
+				setInputValue("");
+				setFilteredSuggestions([]);
+				e.preventDefault();
+			}
 		};
 
 		return (
 			<div className="relative">
 				<BaseInput
 					value={inputValue}
-					placeholder="learn, study, read..."
 					onChange={handleChange}
 					onKeyDown={handleKeyDown}
 					className={cn(
@@ -43,10 +73,27 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
 						Enterで追加
 					</Badge>
 				)}
+				{filteredSuggestions.length > 0 && (
+					<ul className="absolute z-10 bg-white border border-gray-300 rounded mt-1 w-full">
+						{filteredSuggestions.map((word) => (
+							<li key={word} className="p-2">
+								<button
+									type="button"
+									className="w-full text-left p-2 cursor-pointer hover:bg-gray-200"
+									onClick={() => handleSuggestionClick(word)}
+									onKeyDown={(e) => handleSuggestionKeyDown(e, word)}
+								>
+									{word}
+								</button>
+							</li>
+						))}
+					</ul>
+				)}
 			</div>
 		);
 	},
 );
+
 InputWithEnter.displayName = "InputWithEnter";
 
 export { InputWithEnter };
