@@ -82,9 +82,12 @@ const TextForm = () => {
 							<FormControl>
 								<InputWithEnter id="words" onEnter={handleEnter} />
 							</FormControl>
-							<ul className="flex space-x-2 mt-2">
+							<ul className="flex flex-wrap gap-2 mt-2">
 								{wordList.map((word) => (
-									<Badge key={word} className="text-sm flex items-center">
+									<Badge
+										key={word}
+										className="text-sm flex items-center max-w-xs break-words"
+									>
 										{word}
 										<IconX
 											className="w-4 h-4 ml-1 cursor-pointer"
