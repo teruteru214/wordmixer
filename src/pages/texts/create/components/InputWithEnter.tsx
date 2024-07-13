@@ -1,7 +1,7 @@
 import { Badge } from "@/components/Ui/Badge";
 import { Input as BaseInput } from "@/components/Ui/Input";
 import { cn } from "@/lib/utils";
-import words from "an-array-of-english-words"; // インポート
+import words from "an-array-of-english-words";
 import React, { useState } from "react";
 
 export interface InputWithEnterProps
@@ -96,4 +96,4 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
 
 InputWithEnter.displayName = "InputWithEnter";
 
-export { InputWithEnter };
+export default InputWithEnter;

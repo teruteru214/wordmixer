@@ -16,7 +16,7 @@ import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { InputWithEnter } from "./InputWithEnter";
+import InputWithEnter from "./InputWithEnter";
 
 const formSchema = z.object({
 	words: z
