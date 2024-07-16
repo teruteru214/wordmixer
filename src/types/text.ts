@@ -3,13 +3,14 @@ export interface Text {
 	user_id: number;
 	level: string;
 	theme: string;
-	english: string;
-	japanese: string;
+	en: string;
+	ja: string;
 	words: string[];
 }
 
 export interface TextProps {
 	text: Text;
+	translation: "ja" | "en";
 }
 
 export interface TextsProps {
