@@ -1,5 +1,5 @@
 import Footer from "@/components/Layout/Footer";
-import LoginHeader from "@/components/Layout/LoginHeader";
+import Header from "@/components/Layout/Header";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Roboto } from "next/font/google";
@@ -12,7 +12,7 @@ const roboto = Roboto({
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<main className={roboto.className}>
-			<LoginHeader />
+			<Header />
 			<Component {...pageProps} />
 			<Footer />
 		</main>
