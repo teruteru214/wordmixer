@@ -1,5 +1,5 @@
-import Footer from "@/components/Layout/Footer";
-import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer/Footer";
+import Header from "@/components/Layout/Header/Header";
 import "@/styles/globals.css";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
