@@ -1,5 +1,4 @@
 import { IconBrandGoogle, IconX } from "@tabler/icons-react";
-import { signIn } from "next-auth/react";
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -41,7 +40,7 @@ const RegisterModal = () => {
 						<p className="px-2 text-gray-400">または</p>
 						<hr className="flex-grow border-gray-300" />
 					</div>
-					<Button onClick={() => signIn("google")}>
+					<Button>
 						<IconBrandGoogle className="mr-2" />
 						Googleアカウントで新規登録
 					</Button>
