@@ -21,9 +21,8 @@ import {
 	IconMessageCircle,
 	IconThumbUp,
 } from "@tabler/icons-react";
-import { signOut } from "next-auth/react";
 
-const LoginMenu = () => {
+const Menu = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -64,7 +63,7 @@ const LoginMenu = () => {
 						<IconCalendarMonth className="mr-2 h-4 w-4" />
 						<span>学習記録</span>
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={() => signOut()}>
+					<DropdownMenuItem>
 						<IconLogout className="mr-2 h-4 w-4" />
 						<span>ログアウト</span>
 					</DropdownMenuItem>
@@ -101,4 +100,4 @@ const LoginMenu = () => {
 	);
 };
 
-export default LoginMenu;
+export default Menu;
