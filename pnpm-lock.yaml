@@ -44,6 +44,12 @@ importers:
       '@radix-ui/react-toggle':
         specifier: ^1.1.0
         version: 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@supabase/auth-ui-react':
+        specifier: ^0.4.7
+        version: 0.4.7(@supabase/supabase-js@2.44.4)
+      '@supabase/auth-ui-shared':
+        specifier: ^0.1.8
+        version: 0.1.8(@supabase/supabase-js@2.44.4)
       '@supabase/ssr':
         specifier: ^0.4.0
         version: 0.4.0(@supabase/supabase-js@2.44.4)
@@ -704,8 +710,21 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@stitches/core@1.2.8':
+    resolution: {integrity: sha512-Gfkvwk9o9kE9r9XNBmJRfV8zONvXThnm1tcuojL04Uy5uRyqg93DC83lDebl0rocZCfKSjUv+fWYtMQmEDJldg==}
+
   '@supabase/auth-js@2.64.4':
     resolution: {integrity: sha512-9ITagy4WP4FLl+mke1rchapOH0RQpf++DI+WSG2sO1OFOZ0rW3cwAM0nCrMOxu+Zw4vJ4zObc08uvQrXx590Tg==}
+
+  '@supabase/auth-ui-react@0.4.7':
+    resolution: {integrity: sha512-Lp4FQGFh7BMX1Y/BFaUKidbryL7eskj1fl6Lby7BeHrTctbdvDbCMjVKS8wZ2rxuI8FtPS2iU900fSb70FHknQ==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.21.0
+
+  '@supabase/auth-ui-shared@0.1.8':
+    resolution: {integrity: sha512-ouQ0DjKcEFg+0gZigFIEgu01V3e6riGZPzgVD0MJsCBNsMsiDT74+GgCEIElMUpTGkwSja3xLwdFRFgMNFKcjg==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.21.0
 
   '@supabase/functions-js@2.4.1':
     resolution: {integrity: sha512-8sZ2ibwHlf+WkHDUZJUXqqmPvWQ3UHN0W30behOJngVh/qHHekhJLCFbh0AjkE9/FqqXtf9eoVvmYgfCLk5tNA==}
@@ -1125,6 +1144,9 @@ packages:
     resolution: {integrity: sha512-0vzE+lAiG7hZl1/9I8yzKLx3aR9Xbof3fBHKunvMfOCYAtMhrsnccJY2iTURb9EZd5+pLuiNV9/c/GZJOHsgIw==}
     engines: {node: ^10 || ^12 || >=14}
 
+  prop-types@15.8.1:
+    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -1138,6 +1160,9 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
+
+  react-is@16.13.1:
+    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
   react-remove-scroll-bar@2.3.6:
     resolution: {integrity: sha512-DtSYaao4mBmX+HDo5YWYdBWQwYIQQshUV/dVxFxK+KM26Wjwp1gZ6rv6OC3oujI6Bfu6Xyg3TwK533AQutsn/g==}
@@ -1912,9 +1937,24 @@ snapshots:
   '@rollup/rollup-linux-x64-gnu@4.18.1':
     optional: true
 
+  '@stitches/core@1.2.8': {}
+
   '@supabase/auth-js@2.64.4':
     dependencies:
       '@supabase/node-fetch': 2.6.15
+
+  '@supabase/auth-ui-react@0.4.7(@supabase/supabase-js@2.44.4)':
+    dependencies:
+      '@stitches/core': 1.2.8
+      '@supabase/auth-ui-shared': 0.1.8(@supabase/supabase-js@2.44.4)
+      '@supabase/supabase-js': 2.44.4
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
+  '@supabase/auth-ui-shared@0.1.8(@supabase/supabase-js@2.44.4)':
+    dependencies:
+      '@supabase/supabase-js': 2.44.4
 
   '@supabase/functions-js@2.4.1':
     dependencies:
@@ -2310,6 +2350,12 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
+  prop-types@15.8.1:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+
   queue-microtask@1.2.3: {}
 
   react-dom@18.3.1(react@18.3.1):
@@ -2321,6 +2367,8 @@ snapshots:
   react-hook-form@7.52.1(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  react-is@16.13.1: {}
 
   react-remove-scroll-bar@2.3.6(@types/react@18.3.3)(react@18.3.1):
     dependencies:
