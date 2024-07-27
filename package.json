@@ -15,6 +15,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
+		"@next-auth/supabase-adapter": "^0.2.1",
 		"@radix-ui/react-accordion": "^1.2.0",
 		"@radix-ui/react-alert-dialog": "^1.1.1",
 		"@radix-ui/react-checkbox": "^1.1.1",
@@ -34,8 +35,10 @@
 		"an-array-of-english-words": "^2.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"jsonwebtoken": "^9.0.2",
 		"lucide-react": "^0.400.0",
 		"next": "14.2.4",
+		"next-auth": "^4.24.7",
 		"react": "^18",
 		"react-dom": "^18",
 		"react-hook-form": "^7.52.1",
