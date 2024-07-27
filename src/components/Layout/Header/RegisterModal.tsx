@@ -5,7 +5,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/Ui/Form";
-import { supabase } from "@/lib/supabase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconBrandGoogle, IconX } from "@tabler/icons-react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -54,23 +53,9 @@ const RegisterModal = () => {
 		reset,
 	} = methods;
 
-	const onSubmit = async (data: FormData) => {
-		try {
-			const { email, password } = data;
-			const { error } = await supabase.auth.signUp({
-				email,
-				password,
-			});
-
-			if (error) {
-				throw new Error(error.message);
-			}
-			console.log("Registration successful");
-		} catch (err) {
-			console.error(err);
-		} finally {
-			reset();
-		}
+	const onSubmit = (data: FormData) => {
+		console.log("Register form submitted", data);
+		reset();
 	};
 
 	return (
