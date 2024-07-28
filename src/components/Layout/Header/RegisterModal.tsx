@@ -7,6 +7,7 @@ import {
 } from "@/components/Ui/Form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconBrandGoogle, IconX } from "@tabler/icons-react";
+import { signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -159,18 +160,20 @@ const RegisterModal = () => {
 							<Button type="submit" variant={isValid ? "default" : "disabled"}>
 								新規登録
 							</Button>
-							<div className="flex items-center">
-								<hr className="flex-grow border-gray-300" />
-								<p className="px-2 text-gray-400">または</p>
-								<hr className="flex-grow border-gray-300" />
-							</div>
-							<Button>
-								<IconBrandGoogle className="mr-2" />
-								Googleアカウントで新規登録
-							</Button>
 						</div>
 					</form>
 				</FormProvider>
+				<div className="flex items-center">
+					<hr className="flex-grow border-gray-300" />
+					<p className="px-2 text-gray-400">または</p>
+					<hr className="flex-grow border-gray-300" />
+				</div>
+				<div className="flex flex-col space-y-2">
+					<Button onClick={() => signIn("google")}>
+						<IconBrandGoogle className="mr-2" />
+						Googleアカウントで新規登録
+					</Button>
+				</div>
 				<AlertDialogDescription className="text-center">
 					登録済みの方はこちら
 				</AlertDialogDescription>
