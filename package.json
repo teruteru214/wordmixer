@@ -16,6 +16,7 @@
 	"dependencies": {
 		"@hookform/resolvers": "^3.9.0",
 		"@next-auth/supabase-adapter": "^0.2.1",
+		"@prisma/client": "^5.17.0",
 		"@radix-ui/react-accordion": "^1.2.0",
 		"@radix-ui/react-alert-dialog": "^1.1.1",
 		"@radix-ui/react-checkbox": "^1.1.1",
@@ -51,6 +52,7 @@
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
 		"postcss": "^8",
+		"prisma": "^5.17.0",
 		"tailwindcss": "^3.4.1",
 		"typescript": "^5"
 	}
