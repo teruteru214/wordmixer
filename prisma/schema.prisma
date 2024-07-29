@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  FREE
+  STANDARD
+  ADMIN
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  password     String
+  subscription UserRole @default(FREE)
+  goods        Good[]
+  solveLaters  SolveLater[]
+  memos        Memo[]
+  flags        Flag[]
+  actives      Active[]
+  texts        Text[]
+}
+
+model Active {
+  userId   Int
+  attempts Int
+  date     DateTime
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, attempts, date])
+}
+
+model Good {
+  userId  Int
+  textId  Int
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
+
+  @@id([userId, textId])
+}
+
+model SolveLater {
+  userId  Int
+  textId  Int
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
+
+  @@id([userId, textId])
+}
+
+model Memo {
+  userId  Int
+  textId  Int
+  memo    String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
+
+  @@id([userId, textId])
+}
+
+model Flag {
+  userId  Int
+  textId  Int
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
+
+  @@id([userId, textId])
+}
+
+model Text {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  en        String
+  ja        String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goods     Good[]
+  solveLaters SolveLater[]
+  memos     Memo[]
+  flags     Flag[]
+  textWords TextWord[]
+  textLevels TextLevel[]
+  textThemes TextTheme[]
+}
+
+model TextWord {
+  textId Int
+  wordId Int
+  text   Text    @relation(fields: [textId], references: [id], onDelete: Cascade)
+  word   Word    @relation(fields: [wordId], references: [id])
+
+  @@id([textId, wordId])
+}
+
+model Word {
+  id       Int      @id @default(autoincrement())
+  word     String   @unique
+  textWords TextWord[]
+}
+
+model TextLevel {
+  textId  Int
+  levelId Int
+  text    Text    @relation(fields: [textId], references: [id], onDelete: Cascade)
+  level   Level   @relation(fields: [levelId], references: [id])
+
+  @@id([textId, levelId])
+}
+
+model Level {
+  id       Int      @id @default(autoincrement())
+  level    String   @unique
+  textLevels TextLevel[]
+}
+
+model TextTheme {
+  textId  Int
+  themeId Int
+  text    Text    @relation(fields: [textId], references: [id], onDelete: Cascade)
+  theme   Theme   @relation(fields: [themeId], references: [id])
+
+  @@id([textId, themeId])
+}
+
+model Theme {
+  id        Int      @id @default(autoincrement())
+  theme     String   @unique
+  textThemes TextTheme[]
+}
