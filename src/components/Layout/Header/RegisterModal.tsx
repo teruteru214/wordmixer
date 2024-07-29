@@ -5,9 +5,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/Ui/Form";
-import { supabase } from "@/lib/supabase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconBrandGoogle, IconX } from "@tabler/icons-react";
+import { signIn } from "next-auth/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -54,23 +54,9 @@ const RegisterModal = () => {
 		reset,
 	} = methods;
 
-	const onSubmit = async (data: FormData) => {
-		try {
-			const { email, password } = data;
-			const { error } = await supabase.auth.signUp({
-				email,
-				password,
-			});
-
-			if (error) {
-				throw new Error(error.message);
-			}
-			console.log("Registration successful");
-		} catch (err) {
-			console.error(err);
-		} finally {
-			reset();
-		}
+	const onSubmit = (data: FormData) => {
+		console.log("Register form submitted", data);
+		reset();
 	};
 
 	return (
@@ -174,18 +160,20 @@ const RegisterModal = () => {
 							<Button type="submit" variant={isValid ? "default" : "disabled"}>
 								新規登録
 							</Button>
-							<div className="flex items-center">
-								<hr className="flex-grow border-gray-300" />
-								<p className="px-2 text-gray-400">または</p>
-								<hr className="flex-grow border-gray-300" />
-							</div>
-							<Button>
-								<IconBrandGoogle className="mr-2" />
-								Googleアカウントで新規登録
-							</Button>
 						</div>
 					</form>
 				</FormProvider>
+				<div className="flex items-center">
+					<hr className="flex-grow border-gray-300" />
+					<p className="px-2 text-gray-400">または</p>
+					<hr className="flex-grow border-gray-300" />
+				</div>
+				<div className="flex flex-col space-y-2">
+					<Button onClick={() => signIn("google")}>
+						<IconBrandGoogle className="mr-2" />
+						Googleアカウントで新規登録
+					</Button>
+				</div>
 				<AlertDialogDescription className="text-center">
 					登録済みの方はこちら
 				</AlertDialogDescription>
