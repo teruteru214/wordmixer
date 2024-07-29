@@ -1,8 +1,8 @@
 import Footer from "@/components/Layout/Footer/Footer";
 import Header from "@/components/Layout/Header/Header";
+import Providers from "@/provider/Providers";
 import "@/styles/globals.css";
 import type { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import { Roboto } from "next/font/google";
 
@@ -17,11 +17,11 @@ export default function App({
 }: AppProps<{ session: Session }>) {
 	return (
 		<main className={roboto.className}>
-			<SessionProvider session={pageProps.session}>
+			<Providers session={pageProps.session}>
 				<Header />
 				<Component {...pageProps} />
 				<Footer />
-			</SessionProvider>
+			</Providers>
 		</main>
 	);
 }
