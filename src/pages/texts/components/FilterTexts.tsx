@@ -8,11 +8,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/Ui/Select";
+import TextCard from "@/pages/components/TextCard";
 import ai from "@/public/ai.webp";
 import type { TextProps, TextsProps } from "@/types/text";
 import Image from "next/image";
 import { useState } from "react";
-import TextCard from "./TextCard";
 
 const FilterTexts = ({ texts = [] }: TextsProps) => {
 	const [filter, setFilter] = useState<string>("");
