@@ -81,11 +81,7 @@ const RegisterModal = () => {
 								<FormItem>
 									<FormLabel>Name</FormLabel>
 									<FormControl>
-										<Input
-											className="rounded"
-											placeholder="john doe"
-											{...field}
-										/>
+										<Input placeholder="john doe" {...field} />
 									</FormControl>
 									{errors.name && (
 										<FormMessage>{errors.name.message}</FormMessage>
@@ -100,11 +96,7 @@ const RegisterModal = () => {
 								<FormItem>
 									<FormLabel>Email</FormLabel>
 									<FormControl>
-										<Input
-											className="rounded"
-											placeholder="example@gmail.com"
-											{...field}
-										/>
+										<Input placeholder="example@gmail.com" {...field} />
 									</FormControl>
 									{errors.email && (
 										<FormMessage>{errors.email.message}</FormMessage>
@@ -121,7 +113,6 @@ const RegisterModal = () => {
 									<FormControl>
 										<Input
 											type="password"
-											className="rounded"
 											placeholder="8 characters or more"
 											{...field}
 										/>
@@ -141,7 +132,6 @@ const RegisterModal = () => {
 									<FormControl>
 										<Input
 											type="password"
-											className="rounded"
 											placeholder="confirmation"
 											{...field}
 										/>

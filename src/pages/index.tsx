@@ -1,56 +1,34 @@
-import { Button } from "@/components/Ui/Button";
-import Image from "next/image";
-import communication from "../public/communication.webp";
-import developer from "../public/developer.webp";
-import student from "../public/study.webp";
-import video from "../public/video.webp";
+import {} from "@/components/Ui/Tabs";
+import type { TextsProps } from "@/types/text";
+import type { GetServerSideProps } from "next";
+import InputWithSearch from "./components/InputWithSearch";
+import TextCard from "./components/TextCard";
 
-export default function Home() {
+const Home: React.FC<TextsProps> = ({ texts }) => {
 	return (
-		<div className="max-w-screen-lg mx-auto">
-			<h1 className="text-2xl sm:text-4xl text-center mt-14">
-				苦手な英単語、まとめて克服
-			</h1>
-			<p className="text-xs sm:text-base text-gray-400 text-center">
-				わからない英単語を元に、AIが英文を作成します。
-				<br />
-				作成した英文を翻訳して、英単語の使い方を学ぶ学習ツールです。
-			</p>
-			<div className="flex justify-center">
-				<Button className="text-2xl mt-4" size="lg">
-					英語学習を始める
-				</Button>
-			</div>
-			<h2 className="text-2xl sm:text-4xl text-center my-8">
-				こんな方におすすめ
-			</h2>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={student} alt="student" height={300} />
-					<p className="text-center my-2 text-gray-400">
-						試験勉強や日々の学習に
-					</p>
-				</div>
-				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={developer} alt="developer" height={300} />
-					<p className="text-center text-gray-400">コードの読解力の向上に</p>
-				</div>
-				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={communication} alt="communication" height={300} />
-					<p className="text-center text-gray-400">異文化交流に</p>
-				</div>
-				<div className="flex flex-col items-center justify-between h-80">
-					<Image src={video} alt="video" height={300} />
-					<p className="text-center text-gray-400">
-						海外ドラマが聞き取れるように
-					</p>
-				</div>
-			</div>
-			<div className="flex justify-center">
-				<Button className="text-2xl my-10" size="lg">
-					英語学習を始める
-				</Button>
+		<div className="my-5">
+			<InputWithSearch />
+			<h3 className="text-2xl mt-7 mb-3 font-bold">Latest</h3>
+			<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+				{texts.map((text) => (
+					<TextCard key={text.id} text={text} />
+				))}
 			</div>
 		</div>
 	);
-}
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const { req } = context;
+	const baseUrl = req ? `http://${req.headers.host}` : "";
+
+	const res = await fetch(`${baseUrl}/api/texts/texts-latest`);
+	const texts = await res.json();
+
+	return {
+		props: {
+			texts,
+		},
+	};
+};
+export default Home;

@@ -10,7 +10,6 @@ export interface Text {
 
 export interface TextProps {
 	text: Text;
-	translation: "ja" | "en";
 }
 
 export interface TextsProps {

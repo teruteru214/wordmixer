@@ -3,7 +3,7 @@ import logo from "../../../public/logo.webp";
 
 const Footer = () => {
 	return (
-		<footer className="p-2 border-t border-gray-200">
+		<footer className="p-2 border-t border-gray-200 sm:px-10">
 			<div className="flex justify-between">
 				<menu className="text-left text-xs sm:text-base">
 					<li className="text-gray-400 hover:underline">本サービスについて</li>
@@ -25,7 +25,7 @@ const Footer = () => {
 				<Image src={logo} alt="logo" height={50} />
 			</div>
 			<p className="text-xs sm:text-base text-center text-gray-400 mb-3">
-				@2024 VocabPractice All Rights
+				@2024 WordMixer All Rights
 			</p>
 		</footer>
 	);
