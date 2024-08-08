@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { req } = context;
 	const baseUrl = req ? `http://${req.headers.host}` : "";
 
-	const res = await fetch(`${baseUrl}/api/sample-texts`);
+	const res = await fetch(`${baseUrl}/api/texts/texts-latest`);
 	const texts = await res.json();
 
 	return {

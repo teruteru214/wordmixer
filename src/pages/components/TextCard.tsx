@@ -9,6 +9,9 @@ export default function TextCard({ text }: TextProps) {
 	// 	router.push(`/texts/${text.id}/${translation}`);
 	// };
 
+	// デバッグ用ログ
+	console.table(text);
+
 	return (
 		<Card
 			className="space-y-1 p-2 text-gray-400 text-sm shadow-md cursor-pointer"

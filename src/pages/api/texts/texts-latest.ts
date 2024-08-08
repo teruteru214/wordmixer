@@ -6,6 +6,10 @@ export default async function handler(
 	res: NextApiResponse,
 ) {
 	const texts = await prisma.text.findMany({
+		take: 30,
+		orderBy: {
+			id: "desc",
+		},
 		include: {
 			textLevels: {
 				include: {
@@ -23,7 +27,6 @@ export default async function handler(
 				},
 			},
 		},
-		take: 30,
 	});
 
 	const formattedTexts = texts.map((text) => ({
@@ -31,6 +34,7 @@ export default async function handler(
 		level: text.textLevels[0]?.level.level || "",
 		theme: text.textThemes[0]?.theme.theme || "",
 		words: text.textWords.map((tw) => tw.word.word),
+		wao: text,
 	}));
 
 	res.status(200).json(formattedTexts);
