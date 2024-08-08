@@ -53,7 +53,6 @@ const InputWithSearch = React.forwardRef<
 			setInputValue(word);
 			setFilteredSuggestions([]);
 			e.preventDefault();
-			if (onKeyDown) onKeyDown(e);
 		}
 	};
 
