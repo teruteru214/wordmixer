@@ -1,13 +1,6 @@
 import { Button } from "@/components/Ui/Button";
 import { Input } from "@/components/Ui/Input";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/Ui/Select";
+import {} from "@/components/Ui/Select";
 import TextCard from "@/pages/components/TextCard";
 import ai from "@/public/ai.webp";
 import type { TextProps, TextsProps } from "@/types/text";
@@ -18,7 +11,6 @@ const FilterTexts = ({ texts = [] }: TextsProps) => {
 	const [filter, setFilter] = useState<string>("");
 	const [filteredTexts, setFilteredTexts] =
 		useState<TextProps["text"][]>(texts);
-	const [translation, setTranslation] = useState<"ja" | "en">("ja");
 
 	const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value.toLowerCase();
@@ -30,10 +22,6 @@ const FilterTexts = ({ texts = [] }: TextsProps) => {
 		setFilteredTexts(filtered);
 	};
 
-	const handleTranslationChange = (value: "ja" | "en") => {
-		setTranslation(value);
-	};
-
 	return (
 		<search>
 			<div className="flex space-x-2">
@@ -42,25 +30,11 @@ const FilterTexts = ({ texts = [] }: TextsProps) => {
 					value={filter}
 					onChange={handleFilterChange}
 				/>
-				<Select defaultValue="ja" onValueChange={handleTranslationChange}>
-					<SelectTrigger className="w-[180px]">
-						<SelectValue placeholder="Select a language" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectGroup>
-							<SelectItem value="ja">和訳</SelectItem>
-							<SelectItem value="en">英訳</SelectItem>
-						</SelectGroup>
-					</SelectContent>
-				</Select>
 			</div>
 			{filteredTexts.length > 0 ? (
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-4">
 					{filteredTexts.map(
-						(text) =>
-							text && (
-								<TextCard key={text.id} text={text} translation={translation} />
-							),
+						(text) => text && <TextCard key={text.id} text={text} />,
 					)}
 				</div>
 			) : (
