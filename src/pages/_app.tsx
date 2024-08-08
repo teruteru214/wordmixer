@@ -16,10 +16,14 @@ export default function App({
 	pageProps,
 }: AppProps<{ session: Session }>) {
 	return (
-		<main className={roboto.className}>
+		<main className={`${roboto.className} max-w-7xl mx-auto`}>
 			<Providers session={pageProps.session}>
 				<Header />
-				<Component {...pageProps} />
+				<div className="max-w-5xl mx-auto">
+					<div className="mx-2">
+						<Component {...pageProps} />
+					</div>
+				</div>
 				<Footer />
 			</Providers>
 		</main>
