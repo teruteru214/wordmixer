@@ -56,30 +56,34 @@ const InputWithEnter = React.forwardRef<HTMLInputElement, InputWithEnterProps>(
 		};
 
 		return (
-			<div className="relative">
+			<div className="relative w-full">
 				<BaseInput
 					value={inputValue}
 					onChange={handleChange}
 					onKeyDown={handleKeyDown}
 					className={cn(
-						"flex h-10 w-full rounded-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+						"flex h-10 rounded w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
 						className,
 					)}
+					placeholder="英単語を入力してください"
 					ref={ref}
 					{...props}
 				/>
 				{inputValue && (
-					<Badge className="absolute right-2 top-1/2 transform -translate-y-1/2">
+					<Badge
+						className="absolute right-2 top-1/2 transform -translate-y-1/2 hidden md:block"
+						variant="secondary"
+					>
 						Enterで追加
 					</Badge>
 				)}
 				{filteredSuggestions.length > 0 && (
-					<ul className="absolute z-10 bg-white border border-gray-300 rounded mt-1 w-full">
+					<ul className="absolute z-10 -mt-0.5 w-full bg-white border-r border-l border-b rounded-b-md">
 						{filteredSuggestions.map((word) => (
-							<li key={word} className="p-2">
+							<li key={word}>
 								<button
 									type="button"
-									className="w-full text-left p-2 cursor-pointer hover:bg-gray-200"
+									className="w-full text-left p-2 cursor-pointer hover:bg-gray-100"
 									onClick={() => handleSuggestionClick(word)}
 									onKeyDown={(e) => handleSuggestionKeyDown(e, word)}
 								>
