@@ -24,17 +24,7 @@ model User {
   solveLaters  SolveLater[]
   memos        Memo[]
   flags        Flag[]
-  actives      Active[]
   texts        Text[]
-}
-
-model Active {
-  userId   Int
-  attempts Int
-  date     DateTime
-  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, attempts, date])
 }
 
 model Good {
@@ -66,12 +56,13 @@ model Memo {
 }
 
 model Flag {
-  userId  Int
-  textId  Int
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
+  userId Int
+  textId Int
+  date   DateTime
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text   Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
 
-  @@id([userId, textId])
+  @@id([userId, textId, date])
 }
 
 model Text {
