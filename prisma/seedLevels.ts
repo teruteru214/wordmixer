@@ -103,7 +103,7 @@ const texts: {
 		{
 			en: "Drinking enough water each day is essential for maintaining good health. It keeps your body hydrated, supports overall well-being, and helps your organs function properly.",
 			ja: "毎日十分な水を飲むことは健康を維持するために不可欠です。体を水分で満たし、全体的な幸福をサポートし、臓器が正常に機能するのを助けます。",
-			words: ["drinking", "water", "health", "well being", "hydrated"],
+			words: ["drinking", "water", "health", "hydrated"],
 			theme: "Health",
 		},
 		{
@@ -115,7 +115,7 @@ const texts: {
 		{
 			en: "Regular exercise not only improves your physical health but also enhances your mental well-being. It helps reduce stress, boosts your mood, and increases overall energy levels.",
 			ja: "定期的な運動は身体の健康を向上させるだけでなく、精神的な健康も向上させます。運動はストレスを軽減し、気分を高め、全体的なエネルギーレベルを増加させます。",
-			words: ["exercise", "physical", "health", "mental", "well being"],
+			words: ["exercise", "physical", "health", "mental"],
 			theme: "Health",
 		},
 		{
@@ -177,25 +177,13 @@ const texts: {
 		{
 			en: "The implementation of sustainable practices can significantly reduce environmental impact and promote long-term ecological balance. Businesses and individuals alike must adopt eco-friendly habits to ensure a sustainable future.",
 			ja: "持続可能な慣行の導入は、環境への影響を大幅に削減し、長期的な生態系のバランスを促進することができます。企業と個人の両方が、持続可能な未来を確保するためにエコフレンドリーな習慣を採用する必要があります。",
-			words: [
-				"sustainable",
-				"practices",
-				"environmental",
-				"impact",
-				"eco-friendly",
-			],
+			words: ["sustainable", "practices", "environmental", "impact"],
 			theme: "Environment",
 		},
 		{
 			en: "Developing critical thinking skills is crucial for academic success and informed decision-making in everyday life. It involves analyzing information, evaluating evidence, and making reasoned conclusions.",
 			ja: "批判的思考スキルの開発は、学業の成功と日常生活における情報に基づいた意思決定にとって非常に重要です。情報を分析し、証拠を評価し、合理的な結論を出すことを含みます。",
-			words: [
-				"critical thinking",
-				"academic",
-				"success",
-				"decision making",
-				"evidence",
-			],
+			words: ["critical thinking", "academic", "success", "evidence"],
 			theme: "Education",
 		},
 		{
@@ -237,13 +225,7 @@ const texts: {
 		{
 			en: "Creative problem-solving involves thinking outside the box and exploring innovative solutions. This approach encourages individuals to look at challenges from different perspectives and come up with unique ideas.",
 			ja: "創造的な問題解決は、枠を超えて考え、革新的な解決策を探ることを伴います。このアプローチは、個人が異なる視点から課題を見て、ユニークなアイデアを思いつくことを奨励します。",
-			words: [
-				"creative",
-				"problem solving",
-				"innovative",
-				"solutions",
-				"unique ideas",
-			],
+			words: ["creative", "innovative", "solutions", "unique ideas"],
 			theme: "Business",
 		},
 		{
@@ -253,7 +235,6 @@ const texts: {
 				"physical activity",
 				"nutritious diet",
 				"healthy lifestyle",
-				"mental well being",
 				"quality of life",
 			],
 			theme: "Health",
@@ -280,7 +261,6 @@ const texts: {
 				"environmental sustainability",
 				"policymakers",
 				"natural resources",
-				"long-term planning",
 			],
 			theme: "Environment",
 		},
@@ -312,7 +292,7 @@ const texts: {
 				"technological advancements",
 				"innovative solutions",
 			],
-			theme: "Science",
+			theme: "Technology",
 		},
 		{
 			en: "The study of ancient civilizations provides insights into the cultural and technological achievements of early societies. By examining artifacts, historical records, and architectural remains, researchers can reconstruct the lifestyles, beliefs, and innovations of past cultures. This knowledge contributes to our understanding of human development and cultural evolution.",
@@ -357,7 +337,6 @@ const texts: {
 				"genetic research",
 				"gene therapy",
 				"personalized medicine",
-				"CRISPR",
 				"patient outcomes",
 			],
 			theme: "Health",
@@ -464,7 +443,6 @@ const texts: {
 			ja: "量子力学の研究は、宇宙の基本的な性質に対する理解を革命的に変えました。波動-粒子二重性、重ね合わせ、エンタングルメントなどの概念は古典物理学に挑戦し、原子および亜原子レベルでの粒子の振る舞いに新たな洞察を提供します。これらの原理は理論物理学にとって重要であるだけでなく、複雑な問題を解決するための前例のない計算能力を約束する量子コンピューティングの開発にも実用的な応用があります。",
 			words: [
 				"quantum mechanics",
-				"wave-particle duality",
 				"superposition",
 				"entanglement",
 				"quantum computing",
