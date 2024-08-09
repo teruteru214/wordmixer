@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
 					where: { email: session.user.email },
 				});
 				if (userInfo) {
-					session.user.id = String(userInfo.id);
+					session.user.id = userInfo.id.toString();
 				}
 			}
 			return session;
@@ -43,23 +43,21 @@ export const authOptions: NextAuthOptions = {
 
 		async jwt({ token, user }) {
 			if (user) {
-				const userEmail = user.email as string;
 				const existingUser = await prisma.user.findUnique({
-					where: { email: userEmail },
+					where: { email: user.email },
 				});
 
 				if (!existingUser) {
-					const userName = user.name as string;
 					const newUser = await prisma.user.create({
 						data: {
-							email: userEmail,
-							name: userName,
+							email: user.email,
+							name: user.name,
 							password: "",
 						},
 					});
-					token.id = newUser.id;
+					token.id = newUser.id.toString();
 				} else {
-					token.id = existingUser.id;
+					token.id = existingUser.id.toString();
 				}
 			}
 			return token;
@@ -67,17 +65,15 @@ export const authOptions: NextAuthOptions = {
 	},
 	events: {
 		signIn: async ({ user }) => {
-			const userEmail = user.email as string;
 			const existingUser = await prisma.user.findUnique({
-				where: { email: userEmail },
+				where: { email: user.email },
 			});
 
 			if (!existingUser) {
-				const userName = user.name as string;
 				await prisma.user.create({
 					data: {
-						email: userEmail,
-						name: userName,
+						email: user.email,
+						name: user.name,
 						password: "",
 					},
 				});
