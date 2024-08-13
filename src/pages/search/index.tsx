@@ -1,6 +1,5 @@
 import type { TextsProps } from "@/types/text";
 import type { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
 import InputWithSearch from "../components/InputWithSearch";
 import TextCard from "../components/TextCard";
 
@@ -9,9 +8,7 @@ interface SearchPageProps extends TextsProps {
 }
 
 const Search = ({ texts, q }: SearchPageProps) => {
-	const router = useRouter();
-
-	if (!router.query.q) {
+	if (!q) {
 		return (
 			<div className="mt-5 min-h-screen">
 				<InputWithSearch />
