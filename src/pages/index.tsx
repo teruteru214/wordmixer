@@ -4,7 +4,7 @@ import type { GetServerSideProps } from "next";
 import InputWithSearch from "./components/InputWithSearch";
 import TextCard from "./components/TextCard";
 
-const Home: React.FC<TextsProps> = ({ texts }) => {
+const Home = ({ texts }: TextsProps) => {
 	return (
 		<div className="my-5">
 			<InputWithSearch />
@@ -31,4 +31,5 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		},
 	};
 };
+
 export default Home;
