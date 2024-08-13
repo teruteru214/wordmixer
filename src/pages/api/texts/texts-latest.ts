@@ -5,37 +5,41 @@ export default async function handler(
 	_req: NextApiRequest,
 	res: NextApiResponse,
 ) {
-	const texts = await prisma.text.findMany({
-		take: 30,
-		orderBy: {
-			id: "desc",
-		},
-		include: {
-			textLevels: {
-				include: {
-					level: true,
+	try {
+		const texts = await prisma.text.findMany({
+			take: 30,
+			orderBy: {
+				id: "desc",
+			},
+			include: {
+				textLevels: {
+					include: {
+						level: true,
+					},
+				},
+				textThemes: {
+					include: {
+						theme: true,
+					},
+				},
+				textWords: {
+					include: {
+						word: true,
+					},
 				},
 			},
-			textThemes: {
-				include: {
-					theme: true,
-				},
-			},
-			textWords: {
-				include: {
-					word: true,
-				},
-			},
-		},
-	});
+		});
 
-	const formattedTexts = texts.map((text) => ({
-		id: text.id,
-		level: text.textLevels[0]?.level.level || "",
-		theme: text.textThemes[0]?.theme.theme || "",
-		words: text.textWords.map((tw) => tw.word.word),
-		wao: text,
-	}));
+		const formattedTexts = texts.map((text) => ({
+			id: text.id,
+			level: text.textLevels[0]?.level.level || "",
+			theme: text.textThemes[0]?.theme.theme || "",
+			words: text.textWords.map((tw) => tw.word.word),
+		}));
 
-	res.status(200).json(formattedTexts);
+		res.status(200).json(formattedTexts);
+	} catch (error) {
+		console.error("Error retrieving texts:", error);
+		res.status(500).json("Internal Server Error");
+	}
 }

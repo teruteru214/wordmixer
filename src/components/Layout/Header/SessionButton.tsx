@@ -1,30 +1,11 @@
 import { Button } from "@/components/Ui/Button";
-import { userAtom } from "@/store/userAtom";
 import { IconFileTextAi, IconSearch } from "@tabler/icons-react";
-import { useSetAtom } from "jotai";
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
 import LoginModal from "./LoginModal";
 import Menu from "./Menu";
 
 const SessionButton = () => {
 	const { data: session, status } = useSession();
-	const setUser = useSetAtom(userAtom);
-
-	useEffect(() => {
-		if (session?.user?.email) {
-			fetch("/api/user")
-				.then((res) => res.json())
-				.then((data) => {
-					setUser(data.user);
-				})
-				.catch(() => {
-					setUser(null);
-				});
-		} else {
-			setUser(null);
-		}
-	}, [session, setUser]);
 
 	if (status === "loading") {
 		return null;
