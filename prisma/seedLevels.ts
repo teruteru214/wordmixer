@@ -9,7 +9,7 @@ const user = {
 	subscription: UserRole.FREE,
 };
 
-const levels = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
+const levels = ["very-easy", "easy", "medium", "hard", "very-hard"];
 
 const texts: {
 	[key in (typeof levels)[number]]: {
@@ -19,74 +19,74 @@ const texts: {
 		words?: string[];
 	}[];
 } = {
-	"Very Easy": [
+	"very-easy": [
 		{
 			en: "Study every day to improve your skills.",
 			ja: "毎日勉強してスキルを向上させよう。",
 			words: ["study", "improve", "skills"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Practice makes perfect.",
 			ja: "練習が完璧を作る。",
 			words: ["practice", "perfect"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Drink plenty of water.",
 			ja: "たくさんの水を飲みましょう。",
 			words: ["drink", "water"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Eat healthy food.",
 			ja: "健康的な食べ物を食べましょう。",
 			words: ["eat", "healthy", "food"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Exercise is good for health.",
 			ja: "運動は健康に良いです。",
 			words: ["exercise", "health"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Sleep well every night.",
 			ja: "毎晩よく寝ましょう。",
 			words: ["sleep", "well", "night"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Read books to gain knowledge.",
 			ja: "知識を得るために本を読みましょう。",
 			words: ["read", "books", "knowledge"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Write notes to remember things.",
 			ja: "物事を覚えるためにメモを書きましょう。",
 			words: ["write", "notes", "remember"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Listen to music to relax.",
 			ja: "リラックスするために音楽を聴きましょう。",
 			words: ["listen", "music", "relax"],
-			theme: "Entertainment",
+			theme: "entertainment",
 		},
 		{
 			en: "Help others when you can.",
 			ja: "できるときに他の人を助けましょう。",
 			words: ["help", "others"],
-			theme: "Daily Life",
+			theme: "daily-life",
 		},
 	],
-	Easy: [
+	easy: [
 		{
 			en: "Studying every day helps to improve your skills significantly over time. This practice is essential for personal growth and can lead to great success in your career and personal life.",
 			ja: "毎日勉強することで、時間をかけてスキルを大幅に向上させることができます。この習慣は個人の成長に不可欠であり、キャリアや個人の生活で大きな成功につながる可能性があります。",
 			words: ["studying", "improve", "skills", "personal", "growth"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Practicing regularly is the key to mastering any skill. It not only helps you become better but also builds discipline and perseverance, which are crucial for long-term success.",
@@ -98,58 +98,58 @@ const texts: {
 				"discipline",
 				"perseverance",
 			],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Drinking enough water each day is essential for maintaining good health. It keeps your body hydrated, supports overall well-being, and helps your organs function properly.",
 			ja: "毎日十分な水を飲むことは健康を維持するために不可欠です。体を水分で満たし、全体的な幸福をサポートし、臓器が正常に機能するのを助けます。",
 			words: ["drinking", "water", "health", "hydrated"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Eating a balanced diet provides your body with the necessary nutrients it needs to function properly. This includes a variety of foods that supply proteins, vitamins, and minerals.",
 			ja: "バランスの取れた食事は、体が正常に機能するために必要な栄養素を供給します。これには、タンパク質、ビタミン、ミネラルを供給するさまざまな食品が含まれます。",
 			words: ["eating", "balanced", "diet", "nutrients", "proteins"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Regular exercise not only improves your physical health but also enhances your mental well-being. It helps reduce stress, boosts your mood, and increases overall energy levels.",
 			ja: "定期的な運動は身体の健康を向上させるだけでなく、精神的な健康も向上させます。運動はストレスを軽減し、気分を高め、全体的なエネルギーレベルを増加させます。",
 			words: ["exercise", "physical", "health", "mental"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Getting enough sleep every night is important for your overall health. It helps your body recover from the day's activities, improves concentration, and supports a healthy immune system.",
 			ja: "毎晩十分な睡眠をとることは全体的な健康に重要です。睡眠は一日の活動から体を回復させ、集中力を向上させ、健康な免疫系をサポートします。",
 			words: ["sleep", "health", "recover", "concentration", "immune"],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Reading books regularly helps to expand your knowledge and vocabulary. It also improves your cognitive skills and can be a great way to relax and unwind after a long day.",
 			ja: "定期的に本を読むことで知識と語彙が広がります。また、認知スキルを向上させ、長い一日の後にリラックスしてくつろぐための素晴らしい方法となります。",
 			words: ["reading", "books", "knowledge", "vocabulary", "cognitive"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Writing down important information helps you remember it better. It also keeps you organized and allows you to easily review your notes whenever needed.",
 			ja: "重要な情報を書き留めることで、よりよく覚えることができます。また、整理整頓を保ち、必要に応じて簡単にメモを見直すことができます。",
 			words: ["writing", "information", "remember", "organized", "review"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Listening to music can be a great way to relax and unwind after a long day of work. It helps reduce stress and anxiety, providing a sense of calm and peace.",
 			ja: "音楽を聴くことは、長い仕事の一日の後にリラックスしてくつろぐための素晴らしい方法です。音楽はストレスや不安を軽減し、静けさと平和を提供します。",
 			words: ["listening", "music", "relax", "unwind", "stress"],
-			theme: "Entertainment",
+			theme: "entertainment",
 		},
 		{
 			en: "Helping others in need can provide a sense of fulfillment and purpose in your life. It builds empathy and strengthens your connection to the community.",
 			ja: "困っている人を助けることで、充実感と目的意識が得られます。共感を養い、コミュニティとのつながりを強化します。",
 			words: ["helping", "others", "fulfillment", "purpose", "empathy"],
-			theme: "Daily Life",
+			theme: "daily-life",
 		},
 	],
-	Medium: [
+	medium: [
 		{
 			en: "The rapid advancement of technology has revolutionized the way we live and work, bringing about significant changes in various industries. As technology continues to evolve, it is crucial for individuals to stay updated with the latest developments.",
 			ja: "テクノロジーの急速な進歩は、私たちの生活と仕事の仕方を革命的に変え、さまざまな業界に大きな変化をもたらしました。テクノロジーが進化し続ける中で、最新の開発についていくことが重要です。",
@@ -160,7 +160,7 @@ const texts: {
 				"industries",
 				"developments",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "Effective time management is essential for balancing work responsibilities and personal life commitments. By prioritizing tasks and setting realistic goals, individuals can achieve a better work-life balance and reduce stress.",
@@ -172,19 +172,19 @@ const texts: {
 				"commitments",
 				"stress",
 			],
-			theme: "Business",
+			theme: "business",
 		},
 		{
 			en: "The implementation of sustainable practices can significantly reduce environmental impact and promote long-term ecological balance. Businesses and individuals alike must adopt eco-friendly habits to ensure a sustainable future.",
 			ja: "持続可能な慣行の導入は、環境への影響を大幅に削減し、長期的な生態系のバランスを促進することができます。企業と個人の両方が、持続可能な未来を確保するためにエコフレンドリーな習慣を採用する必要があります。",
 			words: ["sustainable", "practices", "environmental", "impact"],
-			theme: "Environment",
+			theme: "environment",
 		},
 		{
 			en: "Developing critical thinking skills is crucial for academic success and informed decision-making in everyday life. It involves analyzing information, evaluating evidence, and making reasoned conclusions.",
 			ja: "批判的思考スキルの開発は、学業の成功と日常生活における情報に基づいた意思決定にとって非常に重要です。情報を分析し、証拠を評価し、合理的な結論を出すことを含みます。",
 			words: ["critical thinking", "academic", "success", "evidence"],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "Advancements in medical technology have improved patient outcomes and expanded treatment options. These innovations have led to better diagnosis, more effective treatments, and improved quality of life for patients.",
@@ -196,7 +196,7 @@ const texts: {
 				"diagnosis",
 				"quality of life",
 			],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "Cultural exchange programs provide valuable opportunities for students to broaden their horizons and gain global perspectives. By interacting with people from different cultures, students can develop a deeper understanding of the world.",
@@ -208,7 +208,7 @@ const texts: {
 				"horizons",
 				"global perspectives",
 			],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "The study of history helps us understand the present and shape the future by learning from past events. It teaches us about the successes and failures of previous generations, providing valuable lessons for today's world.",
@@ -220,13 +220,13 @@ const texts: {
 				"past events",
 				"valuable lessons",
 			],
-			theme: "History",
+			theme: "history",
 		},
 		{
 			en: "Creative problem-solving involves thinking outside the box and exploring innovative solutions. This approach encourages individuals to look at challenges from different perspectives and come up with unique ideas.",
 			ja: "創造的な問題解決は、枠を超えて考え、革新的な解決策を探ることを伴います。このアプローチは、個人が異なる視点から課題を見て、ユニークなアイデアを思いつくことを奨励します。",
 			words: ["creative", "innovative", "solutions", "unique ideas"],
-			theme: "Business",
+			theme: "business",
 		},
 		{
 			en: "Regular physical activity and a nutritious diet are key components of a healthy lifestyle. These habits not only improve physical health but also enhance mental well-being and overall quality of life.",
@@ -237,7 +237,7 @@ const texts: {
 				"healthy lifestyle",
 				"quality of life",
 			],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "The effective use of digital tools can enhance productivity and streamline workflow processes. By leveraging technology, individuals and businesses can achieve greater efficiency and better results.",
@@ -249,10 +249,10 @@ const texts: {
 				"technology",
 				"efficiency",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 	],
-	Hard: [
+	hard: [
 		{
 			en: "The intricate relationship between economic growth and environmental sustainability poses a significant challenge for policymakers. Balancing the demands of economic development with the need to protect natural resources requires innovative solutions and a commitment to long-term planning. This involves not only regulatory measures but also fostering public awareness and encouraging sustainable practices at all levels of society.",
 			ja: "経済成長と環境の持続可能性の複雑な関係は、政策立案者にとって重大な課題を提起しています。経済発展の要求と自然資源の保護の必要性をバランスさせるには、革新的な解決策と長期的な計画へのコミットメントが必要です。これには、規制措置だけでなく、公共の認識を高め、社会のすべてのレベルで持続可能な慣行を奨励することも含まれます。",
@@ -262,13 +262,13 @@ const texts: {
 				"policymakers",
 				"natural resources",
 			],
-			theme: "Environment",
+			theme: "environment",
 		},
 		{
 			en: "Effective leadership requires the ability to inspire and motivate team members while also providing clear direction and support. Leaders must navigate complex organizational dynamics and make strategic decisions that align with the long-term goals of the organization. This includes managing conflicts, fostering collaboration, and creating a culture of continuous improvement.",
 			ja: "効果的なリーダーシップは、チームメンバーを鼓舞し、動機付ける能力と、明確な方向性とサポートを提供する能力を必要とします。リーダーは、複雑な組織のダイナミクスをナビゲートし、組織の長期目標に一致する戦略的な決定を下さなければなりません。これには、対立の管理、コラボレーションの促進、継続的改善の文化の創造が含まれます。",
 			words: ["leadership", "inspire", "motivate", "direction", "support"],
-			theme: "Business",
+			theme: "business",
 		},
 		{
 			en: "The integration of artificial intelligence into various sectors has the potential to drive innovation and efficiency. However, it also raises ethical concerns regarding privacy, security, and the displacement of human workers. Addressing these challenges requires a comprehensive approach that includes regulatory oversight, ethical guidelines, and ongoing public discourse.",
@@ -280,7 +280,7 @@ const texts: {
 				"ethical concerns",
 				"privacy",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "The exploration of space not only expands our understanding of the universe but also drives technological advancements. Space missions have led to the development of new materials, improved telecommunications, and innovative solutions to engineering challenges. These advancements have applications beyond space exploration, benefiting various industries on Earth.",
@@ -292,7 +292,7 @@ const texts: {
 				"technological advancements",
 				"innovative solutions",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "The study of ancient civilizations provides insights into the cultural and technological achievements of early societies. By examining artifacts, historical records, and architectural remains, researchers can reconstruct the lifestyles, beliefs, and innovations of past cultures. This knowledge contributes to our understanding of human development and cultural evolution.",
@@ -304,7 +304,7 @@ const texts: {
 				"artifacts",
 				"historical records",
 			],
-			theme: "History",
+			theme: "history",
 		},
 		{
 			en: "Implementing effective cybersecurity measures is essential for protecting sensitive data and maintaining privacy. With the increasing prevalence of cyber threats, organizations must adopt comprehensive strategies that include encryption, access controls, and continuous monitoring. Educating employees about security best practices is also crucial to mitigating risks.",
@@ -316,7 +316,7 @@ const texts: {
 				"encryption",
 				"access controls",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "The development of renewable energy sources is crucial for reducing dependence on fossil fuels and mitigating climate change. Innovations in solar, wind, and hydroelectric power have made renewable energy more accessible and cost-effective. Governments and industries must work together to promote the adoption of sustainable energy solutions.",
@@ -328,18 +328,18 @@ const texts: {
 				"solar power",
 				"wind power",
 			],
-			theme: "Environment",
+			theme: "environment",
 		},
 		{
 			en: "Advancements in genetic research have opened new avenues for the treatment of previously incurable diseases. Gene therapy, personalized medicine, and CRISPR technology offer promising possibilities for addressing genetic disorders and improving patient outcomes. These breakthroughs highlight the importance of continued investment in scientific research.",
-			ja: "遺伝子研究の進歩は、これまで治療不可能だった病気の治療に新しい道を開きました。遺伝子治療、個別化医療、およびCRISPR技術は、遺伝子疾患に対処し、患者の治療結果を改善するための有望な可能性を提供します。これらのブレークスルーは、科学研究への継続的な投資の重要性を強調しています。",
+			ja: "遺伝子研究の進歩は、これまで治療不可能だった病気の治療に新しい道を開きました。遺伝子治療、個別化医療、およびCRISPR技術は、遺伝性疾患や慢性疾患の潜在的な治療法を提供します。これらのブレークスルーは、科学研究への継続的な投資の重要性を強調しています。",
 			words: [
 				"genetic research",
 				"gene therapy",
 				"personalized medicine",
 				"patient outcomes",
 			],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "The role of education in fostering innovation and creativity cannot be overstated. Educational institutions must provide students with the tools and opportunities to think critically, solve problems, and develop new ideas. By encouraging a culture of curiosity and experimentation, schools can help cultivate the next generation of innovators.",
@@ -351,7 +351,7 @@ const texts: {
 				"critical thinking",
 				"new ideas",
 			],
-			theme: "Education",
+			theme: "education",
 		},
 		{
 			en: "The development of renewable energy technologies is critical for reducing carbon emissions and combating climate change. These technologies harness natural resources such as sunlight, wind, and water to generate electricity, providing a sustainable alternative to fossil fuels. The transition to renewable energy requires significant investment and policy support, but it promises long-term environmental and economic benefits.",
@@ -363,10 +363,10 @@ const texts: {
 				"sustainable",
 				"fossil fuels",
 			],
-			theme: "Environment",
+			theme: "environment",
 		},
 	],
-	"Very Hard": [
+	"very-hard": [
 		{
 			en: "The interplay of cultural, social, and political factors influences historical events and their interpretations. Understanding this complex web of influences requires a multidisciplinary approach, combining insights from history, sociology, political science, and anthropology. By analyzing these diverse perspectives, we can gain a comprehensive understanding of the forces that shape human history and appreciate the interconnectedness of past events and current realities.",
 			ja: "文化的、社会的、政治的要因の相互作用が、歴史的な出来事とその解釈に影響を与えます。この複雑な影響の網を理解するには、歴史学、社会学、政治学、人類学からの洞察を組み合わせた学際的なアプローチが必要です。これらの多様な視点を分析することで、人類の歴史を形作る力を包括的に理解し、過去の出来事と現在の現実との相互関係を評価することができます。",
@@ -377,7 +377,7 @@ const texts: {
 				"historical events",
 				"multidisciplinary approach",
 			],
-			theme: "History",
+			theme: "history",
 		},
 		{
 			en: "In the realm of artificial intelligence, machine learning algorithms are revolutionizing industries by automating complex tasks and analyzing vast amounts of data with unprecedented accuracy. These algorithms enable predictive analytics, enhancing decision-making processes in fields such as healthcare, finance, and transportation. However, the ethical implications and potential biases in AI systems necessitate rigorous oversight and continuous evaluation to ensure fair and responsible use.",
@@ -389,7 +389,7 @@ const texts: {
 				"predictive analytics",
 				"ethical implications",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "The intricate relationship between physical exercise and mental health has been a subject of extensive research. Regular physical activity is known to reduce symptoms of depression and anxiety, improve mood, and enhance cognitive function. The physiological mechanisms underlying these benefits include the release of endorphins and the reduction of inflammation. Moreover, exercise can serve as a preventive measure, promoting overall well-being and resilience against mental health disorders.",
@@ -401,7 +401,7 @@ const texts: {
 				"anxiety",
 				"cognitive function",
 			],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "The preservation of cultural heritage sites is essential for maintaining the historical and cultural fabric of societies. These sites, ranging from ancient ruins to historic buildings, provide insights into past civilizations and foster a sense of identity and continuity. Preservation efforts often involve complex restoration techniques and require collaboration between governments, organizations, and local communities to balance conservation with modern development.",
@@ -413,7 +413,7 @@ const texts: {
 				"historic buildings",
 				"preservation efforts",
 			],
-			theme: "Art and Literature",
+			theme: "art-and-literature",
 		},
 		{
 			en: "Advancements in biotechnology are paving the way for groundbreaking treatments and therapies in medicine. Techniques such as CRISPR gene editing allow for precise modifications of genetic material, offering potential cures for genetic disorders and chronic diseases. The ethical considerations surrounding these technologies, including the risks of unintended consequences and the debate over human enhancement, require careful regulation and public discourse to navigate the future of biomedicine responsibly.",
@@ -424,7 +424,7 @@ const texts: {
 				"genetic disorders",
 				"ethical considerations",
 			],
-			theme: "Health",
+			theme: "health",
 		},
 		{
 			en: "The impact of climate change on global ecosystems is profound, affecting biodiversity, weather patterns, and sea levels. Mitigating these effects requires international cooperation and comprehensive policies aimed at reducing greenhouse gas emissions, promoting sustainable practices, and protecting vulnerable species and habitats. The transition to a low-carbon economy involves not only technological innovations but also societal shifts towards more sustainable lifestyles and consumption patterns.",
@@ -436,7 +436,7 @@ const texts: {
 				"greenhouse gas emissions",
 				"sustainable practices",
 			],
-			theme: "Environment",
+			theme: "environment",
 		},
 		{
 			en: "The study of quantum mechanics has revolutionized our understanding of the fundamental nature of the universe. Concepts such as wave-particle duality, superposition, and entanglement challenge classical physics and offer new insights into the behavior of particles at the atomic and subatomic levels. These principles are not only crucial for theoretical physics but also have practical applications in developing quantum computing, which promises unprecedented computational power for solving complex problems.",
@@ -447,7 +447,7 @@ const texts: {
 				"entanglement",
 				"quantum computing",
 			],
-			theme: "Technology",
+			theme: "technology",
 		},
 		{
 			en: "In contemporary art, the use of mixed media has become increasingly prevalent, allowing artists to explore and express complex themes in innovative ways. By combining various materials and techniques, artists can create multifaceted works that challenge traditional boundaries and provoke thought. This approach not only expands the possibilities of artistic expression but also reflects the diverse and interconnected nature of modern life.",
@@ -459,7 +459,7 @@ const texts: {
 				"complex themes",
 				"artistic expression",
 			],
-			theme: "Art and Literature",
+			theme: "art-and-literature",
 		},
 		{
 			en: "The rapid urbanization of the world's population presents both opportunities and challenges for sustainable development. Cities are centers of economic activity and innovation, driving growth and creating jobs. However, they also face significant issues such as pollution, infrastructure strain, and social inequality. To achieve sustainable urban development, it is essential to implement policies that balance economic growth with environmental protection and social inclusion.",
@@ -471,7 +471,7 @@ const texts: {
 				"pollution",
 				"social inequality",
 			],
-			theme: "Daily Life",
+			theme: "daily-life",
 		},
 		{
 			en: "Historical events are often shaped by a complex interplay of cultural, social, and political factors. Understanding these influences requires a multidisciplinary approach, drawing insights from history, sociology, political science, and anthropology. By analyzing these diverse perspectives, we can gain a comprehensive understanding of the forces that have shaped human history and continue to influence contemporary society.",
@@ -483,7 +483,7 @@ const texts: {
 				"political factors",
 				"multidisciplinary approach",
 			],
-			theme: "History",
+			theme: "history",
 		},
 	],
 };
