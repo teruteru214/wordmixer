@@ -6,7 +6,6 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import LoginModal from "./LoginModal";
 import Menu from "./Menu";
-import RegisterModal from "./RegisterModal";
 
 const SessionButton = () => {
 	const { data: session, status } = useSession();
@@ -39,7 +38,6 @@ const SessionButton = () => {
 						<IconSearch size={24} />
 					</div>
 					<LoginModal />
-					<RegisterModal />
 				</>
 			) : (
 				<>
