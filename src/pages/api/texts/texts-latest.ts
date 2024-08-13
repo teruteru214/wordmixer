@@ -38,7 +38,8 @@ export default async function handler(
 		}));
 
 		res.status(200).json(formattedTexts);
-	} catch {
+	} catch (error) {
+		console.error("Error retrieving texts:", error);
 		res.status(500).json("Internal Server Error");
 	}
 }
