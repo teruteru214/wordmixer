@@ -3,19 +3,28 @@ import { Input as BaseInput } from "@/components/Ui/Input";
 import { cn } from "@/lib/utils";
 import { IconSearch } from "@tabler/icons-react";
 import words from "an-array-of-english-words";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+
+interface InputWithSearchProps
+	extends React.InputHTMLAttributes<HTMLInputElement> {
+	initialValue?: string;
+}
 
 const InputWithSearch = React.forwardRef<
 	HTMLInputElement,
-	React.InputHTMLAttributes<HTMLInputElement>
->(({ className, onKeyDown, onChange, ...props }, ref) => {
-	const [inputValue, setInputValue] = useState("");
+	InputWithSearchProps
+>(({ className, onKeyDown, onChange, initialValue = "", ...props }, ref) => {
+	const [inputValue, setInputValue] = useState(initialValue);
 	const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+	const router = useRouter();
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-		if (e.key === "Enter") {
-			if (onKeyDown) onKeyDown(e);
+		if (e.key === "Enter" && inputValue.trim() !== "") {
 			e.preventDefault();
+			router.push(`/search?q=${inputValue}`);
+			setFilteredSuggestions([]);
+			if (onKeyDown) onKeyDown(e);
 		}
 	};
 
@@ -34,14 +43,10 @@ const InputWithSearch = React.forwardRef<
 	};
 
 	const handleSuggestionClick = (word: string) => {
-		setInputValue(word);
-		setFilteredSuggestions([]);
-		if (onKeyDown) {
-			onKeyDown(
-				new KeyboardEvent("keydown", {
-					key: "Enter",
-				}) as unknown as React.KeyboardEvent<HTMLInputElement>,
-			);
+		if (word.trim() !== "") {
+			setInputValue(word);
+			setFilteredSuggestions([]);
+			router.push(`/search?q=${word}`);
 		}
 	};
 
@@ -49,9 +54,10 @@ const InputWithSearch = React.forwardRef<
 		e: React.KeyboardEvent<HTMLButtonElement>,
 		word: string,
 	) => {
-		if (e.key === "Enter" || e.key === " ") {
+		if (e.key === "Enter" || (e.key === " " && word.trim() !== "")) {
 			setInputValue(word);
 			setFilteredSuggestions([]);
+			router.push(`/search?q=${word}`);
 			e.preventDefault();
 		}
 	};
@@ -66,7 +72,7 @@ const InputWithSearch = React.forwardRef<
 					"flex h-10 rounded w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
 					className,
 				)}
-				placeholder="英単語を入力してください"
+				placeholder="学習したい英単語を入力してください"
 				ref={ref}
 				{...props}
 			/>
@@ -79,7 +85,10 @@ const InputWithSearch = React.forwardRef<
 				</Badge>
 			)}
 			{filteredSuggestions.length > 0 && (
-				<ul className="absolute z-10 -mt-0.5 w-full bg-white border-r border-l border-b rounded-b-md">
+				<ul
+					className="absolute z-10 -mt-0.5 w-full bg-white border-r border-l border-b rounded-b-md"
+					aria-label="Search suggestions"
+				>
 					{filteredSuggestions.map((word) => (
 						<li key={word}>
 							<button
