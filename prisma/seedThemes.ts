@@ -9,16 +9,16 @@ const user = {
 	subscription: UserRole.FREE,
 };
 
-const levels = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
+const levels = ["very-easy", "easy", "medium", "hard", "very-hard"];
 
 const texts = [
 	{
-		theme: "Business",
+		theme: "business",
 		texts: [
 			{
-				en: "The meeting starts at 10 AM.",
+				en: "The meeting starts at 10am.",
 				ja: "会議は午前10時に始まります。",
-				words: ["meeting", "starts", "10 AM"],
+				words: ["meeting", "starts"],
 			},
 			{
 				en: "Please prepare the report.",
@@ -68,7 +68,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Travel",
+		theme: "travel",
 		texts: [
 			{
 				en: "I love traveling to new places.",
@@ -123,7 +123,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Health",
+		theme: "health",
 		texts: [
 			{
 				en: "Exercise is important for health.",
@@ -178,7 +178,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Technology",
+		theme: "technology",
 		texts: [
 			{
 				en: "Technology is advancing rapidly.",
@@ -211,9 +211,9 @@ const texts = [
 				words: ["internet", "changed", "lives"],
 			},
 			{
-				en: "We rely on technology every day.",
+				en: "We rely on technology everyday.",
 				ja: "毎日テクノロジーに依存しています。",
-				words: ["rely", "technology", "every day"],
+				words: ["rely", "technology", "everyday"],
 			},
 			{
 				en: "The device has many features.",
@@ -233,7 +233,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Education",
+		theme: "education",
 		texts: [
 			{
 				en: "Education is the key to success.",
@@ -288,7 +288,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Daily Life",
+		theme: "daily-life",
 		texts: [
 			{
 				en: "I wake up early in the morning.",
@@ -296,9 +296,9 @@ const texts = [
 				words: ["wake up", "early", "morning"],
 			},
 			{
-				en: "I usually have breakfast at 7 AM.",
+				en: "I usually have breakfast at 7am.",
 				ja: "通常、朝食は午前7時に食べます。",
-				words: ["breakfast", "7 AM"],
+				words: ["breakfast"],
 			},
 			{
 				en: "I commute to work by bus.",
@@ -343,7 +343,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Environment",
+		theme: "environment",
 		texts: [
 			{
 				en: "We should protect the environment.",
@@ -398,7 +398,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Entertainment",
+		theme: "entertainment",
 		texts: [
 			{
 				en: "I enjoy watching movies.",
@@ -449,7 +449,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "Art and Literature",
+		theme: "art-and-literature",
 		texts: [
 			{
 				en: "Art is a form of expression.",
@@ -489,7 +489,7 @@ const texts = [
 			{
 				en: "Classical music is very soothing.",
 				ja: "クラシック音楽は非常に癒されます。",
-				words: ["classical music", "soothing"],
+				words: ["classical", "soothing"],
 			},
 			{
 				en: "I enjoy sculpting and pottery.",
@@ -504,7 +504,7 @@ const texts = [
 		],
 	},
 	{
-		theme: "History",
+		theme: "history",
 		texts: [
 			{
 				en: "History teaches us valuable lessons.",
@@ -519,7 +519,7 @@ const texts = [
 			{
 				en: "World War II had a significant impact.",
 				ja: "第二次世界大戦は大きな影響を与えました。",
-				words: ["World War II", "significant", "impact"],
+				words: ["significant", "impact"],
 			},
 			{
 				en: "Historical events shape our present.",
@@ -554,7 +554,7 @@ const texts = [
 			{
 				en: "Historical figures inspire us.",
 				ja: "歴史的人物は私たちにインスピレーションを与えます。",
-				words: ["historical figures", "inspire"],
+				words: ["figures", "inspire"],
 			},
 		],
 	},
@@ -599,11 +599,11 @@ async function main() {
 				},
 			});
 
-			// "Very Easy"レベルに関連付け
+			// "very-easy"レベルに関連付け
 			const createdLevel = await prisma.level.upsert({
-				where: { level: "Very Easy" },
+				where: { level: "very-easy" },
 				update: {},
-				create: { level: "Very Easy" },
+				create: { level: "very-easy" },
 			});
 
 			await prisma.textLevel.create({

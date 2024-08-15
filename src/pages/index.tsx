@@ -6,13 +6,17 @@ import TextCard from "./components/TextCard";
 
 const Home = ({ texts }: TextsProps) => {
 	return (
-		<div className="my-5">
-			<InputWithSearch />
-			<h3 className="text-2xl mt-7 mb-3 font-bold">Latest</h3>
-			<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-				{texts.map((text) => (
-					<TextCard key={text.id} text={text} />
-				))}
+		<div className="max-w-5xl mx-auto">
+			<div className="mx-2">
+				<div className="my-5">
+					<InputWithSearch />
+					<h3 className="text-2xl mt-7 mb-3 font-bold">Latest</h3>
+					<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+						{texts.map((text) => (
+							<TextCard key={text.id} text={text} />
+						))}
+					</div>
+				</div>
 			</div>
 		</div>
 	);

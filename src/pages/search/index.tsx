@@ -10,35 +10,43 @@ interface SearchPageProps extends TextsProps {
 const Search = ({ texts, q }: SearchPageProps) => {
 	if (!q) {
 		return (
-			<div className="mt-5 min-h-screen">
-				<InputWithSearch />
+			<div className="max-w-5xl mx-auto">
+				<div className="mx-2">
+					<div className="mt-5 min-h-screen">
+						<InputWithSearch />
+					</div>
+				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className="my-5 min-h-screen">
-			<InputWithSearch />
-			{texts.length > 0 ? (
-				<>
-					<h3 className="text-3xl mt-7 mb-3 font-bold">#{q}</h3>
-					<div
-						className="grid grid-cols-2 md:grid-cols-3 gap-3 animate-fade-up"
-						key={q}
-					>
-						{texts.map((text) => (
-							<TextCard key={text.id} text={text} />
-						))}
-					</div>
-				</>
-			) : (
-				<p
-					className="text-gray-400 font-bold text-center mt-12 animate-fade-up"
-					key={q}
-				>
-					{q}の検索結果が見つかりませんでした
-				</p>
-			)}
+		<div className="max-w-5xl mx-auto">
+			<div className="mx-2">
+				<div className="my-5 min-h-screen">
+					<InputWithSearch />
+					{texts.length > 0 ? (
+						<>
+							<h3 className="text-3xl mt-7 mb-3 font-bold">#{q}</h3>
+							<div
+								className="grid grid-cols-2 md:grid-cols-3 gap-3 animate-fade-up"
+								key={q}
+							>
+								{texts.map((text) => (
+									<TextCard key={text.id} text={text} />
+								))}
+							</div>
+						</>
+					) : (
+						<p
+							className="text-gray-400 font-bold text-center mt-12 animate-fade-up"
+							key={q}
+						>
+							{q}の検索結果が見つかりませんでした
+						</p>
+					)}
+				</div>
+			</div>
 		</div>
 	);
 };
