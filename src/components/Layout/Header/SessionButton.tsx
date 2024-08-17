@@ -17,6 +17,10 @@ const SessionButton = () => {
 		router.push("/search");
 	};
 
+	const handleCreateClick = () => {
+		router.push("/create");
+	};
+
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === "Enter" || e.key === " ") {
 			handleSearchClick();
@@ -41,7 +45,7 @@ const SessionButton = () => {
 			) : (
 				<>
 					<Menu />
-					<Button size="xs">
+					<Button size="xs" onClick={handleCreateClick}>
 						<IconFileTextAi size={16} />
 						文章作成
 					</Button>
