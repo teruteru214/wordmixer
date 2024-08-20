@@ -84,12 +84,18 @@ const config = {
 						transform: "translateY(0)",
 					},
 				},
+				"reverse-spin": {
+					from: { transform: "rotate(360deg)" },
+					to: { transform: "rotate(0deg)" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"fade-in": "fade-in 1s ease-in-out",
 				"fade-up": "fade-up 0.5s ease-out",
+				"spin-fast": "spin 1.5s linear infinite",
+				"reverse-spin": "reverse-spin 0.6s linear infinite",
 			},
 		},
 	},

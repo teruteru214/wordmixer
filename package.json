@@ -14,6 +14,7 @@
 		"check:fix": "biome check --apply <files>"
 	},
 	"dependencies": {
+		"@google/generative-ai": "^0.17.0",
 		"@hookform/resolvers": "^3.9.0",
 		"@next-auth/supabase-adapter": "^0.2.1",
 		"@prisma/client": "^5.17.0",
@@ -34,6 +35,7 @@
 		"@supabase/ssr": "^0.4.0",
 		"@supabase/supabase-js": "^2.44.4",
 		"@tabler/icons-react": "^3.9.0",
+		"@tanstack/react-query": "^5.51.23",
 		"an-array-of-english-words": "^2.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",

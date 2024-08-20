@@ -11,7 +11,7 @@ const Search = ({ texts, q }: SearchPageProps) => {
 	if (!q) {
 		return (
 			<div className="max-w-5xl mx-auto">
-				<div className="mx-2">
+				<div className="mx-2 sm:mx-6">
 					<div className="mt-5 min-h-screen">
 						<InputWithSearch />
 					</div>
@@ -22,7 +22,7 @@ const Search = ({ texts, q }: SearchPageProps) => {
 
 	return (
 		<div className="max-w-5xl mx-auto">
-			<div className="mx-2">
+			<div className="mx-2 sm:mx-6">
 				<div className="my-5 min-h-screen">
 					<InputWithSearch />
 					{texts.length > 0 ? (
