@@ -8,21 +8,23 @@ import SessionButton from "./SessionButton";
 const Header = () => {
 	return (
 		<header className="sticky top-0 left-0 right-0 z-50 bg-white h-[100px]">
-			<div className="max-w-7xl mx-auto grid grid-cols-1 gap-4 items-center px-2 pt-2 sm:mx-4">
-				<div className="flex justify-between w-full">
-					<div className="flex items-center">
-						<Image src={logo} alt="logo" height={35} />
+			<div className="max-w-7xl mx-auto">
+				<div className="grid grid-cols-1 gap-4 items-center px-2 pt-2 sm:mx-4">
+					<div className="flex justify-between w-full">
+						<div className="flex items-center">
+							<Image src={logo} alt="logo" height={35} />
+						</div>
+						<SessionButton />
 					</div>
-					<SessionButton />
-				</div>
-				<div className="flex justify-between w-full">
-					<HeaderNavigation />
-					<Tabs defaultValue="ja" className="w-[100px]">
-						<TabsList className="grid w-full grid-cols-2">
-							<TabsTrigger value="ja">和訳</TabsTrigger>
-							<TabsTrigger value="en">英訳</TabsTrigger>
-						</TabsList>
-					</Tabs>
+					<div className="flex justify-between w-full">
+						<HeaderNavigation />
+						<Tabs defaultValue="ja" className="w-[100px]">
+							<TabsList className="grid w-full grid-cols-2">
+								<TabsTrigger value="ja">和訳</TabsTrigger>
+								<TabsTrigger value="en">英訳</TabsTrigger>
+							</TabsList>
+						</Tabs>
+					</div>
 				</div>
 			</div>
 		</header>
