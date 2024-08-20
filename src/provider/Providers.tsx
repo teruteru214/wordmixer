@@ -1,7 +1,8 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
 import type { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 
 type ProvidersProps = {
 	children: ReactNode;
@@ -9,10 +10,14 @@ type ProvidersProps = {
 };
 
 const Providers = ({ children, session }: ProvidersProps) => {
+	const [queryClient] = useState(() => new QueryClient());
+
 	return (
-		<JotaiProvider>
-			<SessionProvider session={session}>{children}</SessionProvider>
-		</JotaiProvider>
+		<QueryClientProvider client={queryClient}>
+			<JotaiProvider>
+				<SessionProvider session={session}>{children}</SessionProvider>
+			</JotaiProvider>
+		</QueryClientProvider>
 	);
 };
 
