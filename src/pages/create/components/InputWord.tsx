@@ -52,12 +52,18 @@ const InputWord = React.forwardRef<HTMLInputElement, InputWordProps>(
 			<div className="relative w-full">
 				<BaseInput
 					value={value}
-					onChange={handleChange} // React Hook Form の onChange を利用
+					onChange={handleChange}
 					className={cn(
 						"flex h-9 rounded w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
 						className,
 					)}
 					placeholder={placeholder}
+					onKeyDown={(e) => {
+						if (e.key === "Enter") {
+							e.preventDefault();
+							setFilteredSuggestions([]);
+						}
+					}}
 					ref={ref}
 					{...props}
 				/>
