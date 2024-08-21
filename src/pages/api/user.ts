@@ -1,23 +1,31 @@
 import prisma from "@/lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getSession } from "next-auth/react";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-	const session = await getSession({ req });
-
-	if (!session?.user?.email) {
-		res.status(401).json({ message: "Unauthorized" });
-		return;
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse,
+) {
+	if (req.method !== "POST") {
+		return res.status(405).json({ message: "Method not allowed" });
 	}
 
-	const user = await prisma.user.findUnique({
-		where: { email: session.user.email },
-	});
+	const { email } = req.body;
 
-	if (!user) {
-		res.status(404).json({ message: "User not found" });
-		return;
+	if (!email) {
+		return res.status(400).json({ message: "Email is required" });
 	}
 
-	res.status(200).json({ user });
-};
+	try {
+		const user = await prisma.user.findUnique({
+			where: { email },
+		});
+
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		return res.status(200).json({ user });
+	} catch {
+		return res.status(500).json({ message: "Internal Server Error" });
+	}
+}

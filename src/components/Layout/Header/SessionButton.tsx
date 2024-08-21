@@ -1,13 +1,39 @@
 import { Button } from "@/components/Ui/Button";
+import { userAtom } from "@/store/userAtom";
 import { IconFileTextAi, IconSearch } from "@tabler/icons-react";
+import { useSetAtom } from "jotai";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import LoginModal from "./LoginModal";
 import Menu from "./Menu";
 
 const SessionButton = () => {
 	const router = useRouter();
 	const { data: session, status } = useSession();
+
+	const setUser = useSetAtom(userAtom);
+
+	useEffect(() => {
+		if (session?.user?.email) {
+			fetch("/api/user", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email: session.user.email }),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					setUser(data.user); // APIレスポンスのユーザー情報を保存
+				})
+				.catch(() => {
+					setUser(null);
+				});
+		} else {
+			setUser(null);
+		}
+	}, [session, setUser]);
 
 	if (status === "loading") {
 		return null;
