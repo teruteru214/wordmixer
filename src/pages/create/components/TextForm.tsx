@@ -25,8 +25,8 @@ import { IconFileTextAi } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useGenerateTextMutation } from "../hooks/generateText";
-import { useSaveTextMutation } from "../hooks/saveText";
+import useGenerateTextMutation from "../api/generateText";
+import useSaveTextMutation from "../api/saveText";
 import CreatedText from "./CreatedText";
 import InputWord from "./InputWord";
 
