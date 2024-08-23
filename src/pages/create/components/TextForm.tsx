@@ -18,9 +18,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/Ui/Select";
+import { userAtom } from "@/store/userAtom";
+import type { Text } from "@/types/text";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { IconFileTextAi } from "@tabler/icons-react";
+import { useAtomValue } from "jotai";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useGenerateTextMutation } from "../hooks/generateText";
+import { useSaveTextMutation } from "../hooks/saveText";
 import CreatedText from "./CreatedText";
 import InputWord from "./InputWord";
 
@@ -60,6 +66,11 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 const TextForm = () => {
+	const user = useAtomValue(userAtom);
+
+	const generateTextMutation = useGenerateTextMutation();
+	const saveTextMutation = useSaveTextMutation();
+
 	const form = useForm<FormData>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -76,26 +87,55 @@ const TextForm = () => {
 	});
 
 	const onSubmit = async (data: FormData) => {
+		if (!user?.id) {
+			console.error("User not authenticated");
+			return;
+		}
+
+		const filteredWords = Object.values(data.words).filter(
+			(word) => word.trim() !== "",
+		);
+
 		try {
-			const generateResponse = await fetch("/api/texts/create", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					words: data.words,
-					level: data.level,
-					theme: data.theme,
-				}),
+			const generateResult = await generateTextMutation.mutateAsync({
+				words: filteredWords,
+				level: data.level,
+				theme: data.theme,
 			});
 
-			const generateResult = await generateResponse.json();
+			const saveResult = await saveTextMutation.mutateAsync({
+				userId: user.id,
+				enText: generateResult.en,
+				jaText: generateResult.ja,
+				words: filteredWords,
+				level: data.level,
+				theme: data.theme,
+			});
 
-			console.log("Generated Text (EN):", generateResult.en);
-			console.log("Generated Text (JA):", generateResult.ja);
+			const formattedText: Text = {
+				id: saveResult.result.id,
+				user_id: saveResult.result.userId,
+				level: saveResult.result.level,
+				theme: saveResult.result.theme,
+				en: saveResult.result.enText,
+				ja: saveResult.result.jaText,
+				words: saveResult.result.words,
+			};
+
+			return formattedText;
 		} catch (error) {
-			console.error("Fetch error:", error);
+			console.error("Submit error:", error);
 		}
+	};
+
+	const formattedText: Text | undefined = saveTextMutation.data?.result && {
+		id: saveTextMutation.data.result.id,
+		user_id: saveTextMutation.data.result.userId,
+		level: saveTextMutation.data.result.level,
+		theme: saveTextMutation.data.result.theme,
+		en: saveTextMutation.data.result.en,
+		ja: saveTextMutation.data.result.ja,
+		words: saveTextMutation.data.result.words,
 	};
 
 	return (
@@ -278,17 +318,29 @@ const TextForm = () => {
 							)}
 						/>
 						<Button
-							className="w-full text-2xl my-4 rounded-lg"
+							className="w-full rounded-lg text-xl"
 							size="lg"
 							type="submit"
+							variant={form.formState.isValid ? "default" : "disabled"}
+							disabled={!form.formState.isValid}
 						>
-							文章を作成する
+							<IconFileTextAi className="mr-1" size={24} />
+							例文を生成
 						</Button>
 					</form>
 				</Form>
 			</div>
-			<div className="flex-1 h-full w-full md:w-2/5 md:mt-72 flex justify-center items-center ">
-				<CreatedText />
+			<div className="md:w-2/5 md:mt-72 mb-14">
+				<CreatedText
+					isPending={
+						generateTextMutation.isPending || saveTextMutation.isPending
+					}
+					isError={generateTextMutation.isError || saveTextMutation.isError}
+					isSuccess={
+						generateTextMutation.isSuccess && saveTextMutation.isSuccess
+					}
+					text={formattedText}
+				/>
 			</div>
 		</div>
 	);

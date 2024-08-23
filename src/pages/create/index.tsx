@@ -10,7 +10,7 @@ export default function Create() {
 				title="文章作成"
 			/>
 			<div className="max-w-5xl mx-auto">
-				<div className="mx-2 sm:mx-6 my-5">
+				<div className="mx-2 sm:mx-6 mt-10">
 					<TextForm />
 				</div>
 			</div>
