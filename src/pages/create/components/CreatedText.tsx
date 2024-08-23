@@ -48,6 +48,13 @@ const CreatedText: React.FC<CreatedTextProps> = ({
 	}
 
 	if (isSuccess && text) {
+		if (!text) {
+			<div className="flex flex-col items-center">
+				<div className="bg-gray-400 text-white text-sm rounded-full flex items-center justify-center h-48 w-48 animate-blob">
+					<p className="text-center">テキストが見つかりません</p>
+				</div>
+			</div>;
+		}
 		return (
 			<div className="flex justify-center">
 				<div className="w-64 animate-fade-up">
