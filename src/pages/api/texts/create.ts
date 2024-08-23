@@ -22,15 +22,8 @@ export default async function handler(
 			const prompt = `
         Please generate an English text followed by its Japanese translation, strictly adhering to the following criteria:
         Theme: ${theme}
-        Words to use: ${[
-					words.word1,
-					words.word2,
-					words.word3,
-					words.word4,
-					words.word5,
-				]
-					.filter(Boolean)
-					.join(", ")}
+        Level: ${level}
+				Words to use: ${words.join(", ")}
 
         Text Constraints:
 				- The text must use **all of the provided words** in context.
