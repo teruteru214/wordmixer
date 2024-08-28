@@ -1,23 +1,20 @@
 .mikepad-loading {
   width: 150px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .pad {
-  width: 50px;
-  height: 60px;
-  border: 2px solid #9CA3AF;
-  padding: 5px;
+  width: 18px;
+  height: 20px;
+  border: 2px solid #FFFFFF
+  ;
+  padding: 2px;
   margin: 0 auto;
 }
 
 .line {
-  width: 36px;
-  margin-top: 9px;
-  border-top: 2px solid #9CA3AF;
+  width: 10px;
+  margin-top: 3px;
+  border-top: 2px solid #FFFFFF;
   opacity: 0;
   animation: writeline 3s infinite ease-in;
 }
@@ -38,17 +35,10 @@
   animation-delay: 1s;
 }
 
-.line4 {
-  animation-delay: 1.5s;
-}
-
-.line5 {
-  animation-delay: 2s;
-}
 
 @keyframes writeline {
   0% { width: 0px; opacity: 0; }
-  33% { width: 36px; opacity: 1; }
+  33% { width: 10px; opacity: 1; }
   70% { opacity: 1; }
   100% { opacity: 0; }
 }
