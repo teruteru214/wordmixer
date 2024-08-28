@@ -17,10 +17,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/Ui/Select";
+import { ToastAction } from "@/components/Ui/Toast";
+import { useToast } from "@/components/Ui/hooks/useToast";
 import { userAtom } from "@/store/userAtom";
 import styles from "@/styles/writing.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { IconReload } from "@tabler/icons-react";
+import { IconArrowRight, IconReload } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -64,6 +66,7 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function Create() {
 	const [loading, setLoading] = useState(false);
+	const { toast } = useToast();
 	const user = useAtomValue(userAtom);
 
 	const form = useForm<FormData>({
@@ -82,7 +85,7 @@ export default function Create() {
 	});
 
 	const handleClear = () => {
-		form.reset(); // デフォルトの値にリセット
+		form.reset();
 	};
 
 	const onSubmit = async (data: FormData) => {
@@ -117,12 +120,26 @@ export default function Create() {
 				);
 			}
 
-			const result = await response.json();
-			console.log("API Response:", result);
 			setLoading(false);
-		} catch (error) {
-			console.error("Submit error:", error);
+			toast({
+				title: "例文を生成しました🎉",
+				description: "Let's Translation",
+				action: (
+					<ToastAction
+						altText="Complate"
+						className="p-0 border-none bg-transparent"
+					>
+						<IconArrowRight />
+					</ToastAction>
+				),
+			});
+		} catch {
 			setLoading(false);
+			toast({
+				variant: "destructive",
+				title: "例文を生成に失敗しました🙇",
+				description: "もう一度生成し直してください",
+			});
 		}
 	};
 
