@@ -1,0 +1,44 @@
+.mikepad-loading {
+  width: 150px;
+}
+
+.pad {
+  width: 18px;
+  height: 20px;
+  border: 2px solid #FFFFFF
+  ;
+  padding: 2px;
+  margin: 0 auto;
+}
+
+.line {
+  width: 10px;
+  margin-top: 3px;
+  border-top: 2px solid #FFFFFF;
+  opacity: 0;
+  animation: writeline 3s infinite ease-in;
+}
+
+.line:first-child {
+  margin-top: 0;
+}
+
+.line1 {
+  animation-delay: 0s;
+}
+
+.line2 {
+  animation-delay: 0.5s;
+}
+
+.line3 {
+  animation-delay: 1s;
+}
+
+
+@keyframes writeline {
+  0% { width: 0px; opacity: 0; }
+  33% { width: 10px; opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}

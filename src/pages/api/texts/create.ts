@@ -1,4 +1,5 @@
 import { levelConfig } from "@/config/levelConfig";
+import prisma from "@/lib/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -6,69 +7,118 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ) {
-	if (req.method === "POST") {
-		const { words, level, theme } = req.body;
+	if (req.method !== "POST") {
+		return res.status(405).json({ message: "Method not allowed" });
+	}
 
-		const apiKey = process.env.GEMINI_API_KEY;
-		if (!apiKey) {
-			return res.status(500).json({ error: "APIキーが設定されていません" });
-		}
+	const { words, level, theme, userId } = req.body;
 
-		const genAI = new GoogleGenerativeAI(apiKey);
-		const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-		const config = levelConfig[level] ?? levelConfig.medium;
+	if (!userId || !words || !level || !theme) {
+		return res.status(400).json({ message: "Missing required fields" });
+	}
 
-		try {
-			const prompt = `
-        Please generate an English text followed by its Japanese translation, strictly adhering to the following criteria:
-        Theme: ${theme}
-        Words to use: ${[
-					words.word1,
-					words.word2,
-					words.word3,
-					words.word4,
-					words.word5,
-				]
-					.filter(Boolean)
-					.join(", ")}
+	const apiKey = process.env.GEMINI_API_KEY;
+	if (!apiKey) {
+		return res.status(500).json({ error: "APIキーが設定されていません" });
+	}
 
-        Text Constraints:
-				- The text must use **all of the provided words** in context.
-        - The length of the English text **must not exceed** ${config.characterCount}. Please ensure the text remains concise and clear.
-        - Grammar Complexity: Use ${config.grammarComplexity}.
-        - If the text exceeds the length constraint, please shorten the text while maintaining clarity.
+	const genAI = new GoogleGenerativeAI(apiKey);
+	const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+	const config = levelConfig[level] ?? levelConfig.medium;
 
-        The text is invalid if it does not follow these constraints.
-        Please generate the English text first, followed by the Japanese translation, separated by the special marker "---".
-      `;
+	try {
+		const prompt = `
+      Please generate an English text followed by its Japanese translation, strictly adhering to the following criteria:
+      Theme: ${theme}
+      Level: ${level}
+      Words to use: ${words.join(", ")}
 
-			const result = await model.generateContent({
-				contents: [
-					{
-						role: "user",
-						parts: [
-							{
-								text: prompt,
-							},
-						],
-					},
-				],
-				generationConfig: {
-					maxOutputTokens: config.maxTokens,
-					temperature: 0.2,
+      Text Constraints:
+      - The text must use **all of the provided words** in context.
+      - The length of the English text **must not exceed** ${config.characterCount}. Please ensure the text remains concise and clear.
+      - Grammar Complexity: Use ${config.grammarComplexity}.
+      - If the text exceeds the length constraint, please shorten the text while maintaining clarity.
+
+      The text is invalid if it does not follow these constraints.
+      Please generate the English text first, followed by the Japanese translation, separated by the special marker "---".
+    `;
+
+		const result = await model.generateContent({
+			contents: [
+				{
+					role: "user",
+					parts: [
+						{
+							text: prompt,
+						},
+					],
 				},
-			});
+			],
+			generationConfig: {
+				maxOutputTokens: config.maxTokens,
+				temperature: 0.2,
+			},
+		});
 
-			const generatedText = result.response.text();
+		const generatedText = result.response.text();
+		const [enText, jaText] = generatedText.split("---");
 
-			const [enText, jaText] = generatedText.split("---");
+		const newText = await prisma.text.create({
+			data: {
+				userId,
+				en: enText.trim(),
+				ja: jaText.trim(),
+				textWords: {
+					create: words.map((word: string) => ({
+						word: {
+							connectOrCreate: {
+								where: { word },
+								create: { word },
+							},
+						},
+					})),
+				},
+				textLevels: {
+					create: {
+						level: {
+							connectOrCreate: {
+								where: { level },
+								create: { level },
+							},
+						},
+					},
+				},
+				textThemes: {
+					create: {
+						theme: {
+							connectOrCreate: {
+								where: { theme },
+								create: { theme },
+							},
+						},
+					},
+				},
+			},
+			include: {
+				textWords: { include: { word: true } },
+				textLevels: { include: { level: true } },
+				textThemes: { include: { theme: true } },
+			},
+		});
 
-			res.status(200).json({ en: enText.trim(), ja: jaText.trim() });
-		} catch (error) {
-			console.error("AIリクエストに失敗しました:", error);
-			res.status(500).json({ error: "AIリクエストに失敗しました" });
-		}
-	} else {
-		res.status(405).json({ error: "メソッドが許可されていません" });
+		const responseText = {
+			id: newText.id,
+			userId: newText.userId,
+			en: newText.en,
+			ja: newText.ja,
+			words: newText.textWords.map((tw) => tw.word.word),
+			level: newText.textLevels[0]?.level.level || null,
+			theme: newText.textThemes[0]?.theme.theme || null,
+		};
+
+		return res.status(201).json({ result: responseText });
+	} catch (error) {
+		console.error("Error during AI request or saving text:", error);
+		return res.status(500).json({ message: "Internal server error" });
 	}
 }

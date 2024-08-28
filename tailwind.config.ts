@@ -84,9 +84,13 @@ const config = {
 						transform: "translateY(0)",
 					},
 				},
-				"reverse-spin": {
-					from: { transform: "rotate(360deg)" },
-					to: { transform: "rotate(0deg)" },
+				blob: {
+					"0%, 100%": {
+						borderRadius: "45% 55% 60% 40% / 45% 40% 60% 55%",
+					},
+					"50%": {
+						borderRadius: "55% 45% 50% 50% / 50% 50% 45% 55%",
+					},
 				},
 			},
 			animation: {
@@ -94,8 +98,7 @@ const config = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"fade-in": "fade-in 1s ease-in-out",
 				"fade-up": "fade-up 0.5s ease-out",
-				"spin-fast": "spin 1.5s linear infinite",
-				"reverse-spin": "reverse-spin 0.6s linear infinite",
+				blob: "blob 10s ease-in-out infinite",
 			},
 		},
 	},

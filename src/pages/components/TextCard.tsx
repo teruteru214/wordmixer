@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/Ui/Card";
 import type { TextProps } from "@/types/text";
-import { IconFlag, IconThumbUp } from "@tabler/icons-react";
+import { IconFlag } from "@tabler/icons-react";
 
 export default function TextCard({ text }: TextProps) {
 	// const router = useRouter();
@@ -30,8 +30,6 @@ export default function TextCard({ text }: TextProps) {
 					</div>
 					<div className="flex items-center">
 						<IconFlag className="w-5 h-5 text-gray-400" />
-						<IconThumbUp className="w-5 h-5 text-gray-400" />
-						<p className="text-xs">64</p>
 					</div>
 				</div>
 			</CardContent>
