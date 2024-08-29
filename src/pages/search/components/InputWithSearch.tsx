@@ -69,7 +69,7 @@ const InputWithSearch = React.forwardRef<
 				onChange={handleChange}
 				onKeyDown={handleKeyDown}
 				className={cn(
-					"flex h-10 rounded w-full border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
+					"flex h-10 rounded-lg w-full bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50",
 					className,
 				)}
 				placeholder="学習したい英単語を入力してください"
@@ -86,7 +86,7 @@ const InputWithSearch = React.forwardRef<
 			)}
 			{filteredSuggestions.length > 0 && (
 				<ul
-					className="absolute z-10 -mt-0.5 w-full bg-white border-r border-l border-b rounded-b-md"
+					className="absolute z-10 -mt-3 w-full bg-white border-r border-l border-b rounded-b-md"
 					aria-label="Search suggestions"
 				>
 					{filteredSuggestions.map((word) => (

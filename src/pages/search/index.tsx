@@ -1,7 +1,8 @@
 import type { TextsProps } from "@/types/text";
+
 import type { GetServerSideProps } from "next";
-import InputWithSearch from "../components/InputWithSearch";
 import TextCard from "../components/TextCard";
+import InputWithSearch from "./components/InputWithSearch";
 
 interface SearchPageProps extends TextsProps {
 	q: string;
@@ -12,7 +13,7 @@ const Search = ({ texts, q }: SearchPageProps) => {
 		return (
 			<div className="max-w-5xl mx-auto">
 				<div className="mx-2 sm:mx-6">
-					<div className="mt-5 min-h-screen">
+					<div className="pt-5 min-h-screen">
 						<InputWithSearch />
 					</div>
 				</div>
@@ -23,7 +24,7 @@ const Search = ({ texts, q }: SearchPageProps) => {
 	return (
 		<div className="max-w-5xl mx-auto">
 			<div className="mx-2 sm:mx-6">
-				<div className="my-5 min-h-screen">
+				<div className="pt-5 min-h-screen">
 					<InputWithSearch />
 					{texts.length > 0 ? (
 						<>
