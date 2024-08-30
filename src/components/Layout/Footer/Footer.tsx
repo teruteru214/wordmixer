@@ -23,7 +23,8 @@ const Footer = () => {
 				.then((data) => {
 					setUser(data.user);
 				})
-				.catch(() => {
+				.catch((error) => {
+					console.error("Failed to fetch user data:", error);
 					setUser(null);
 				});
 		} else {
