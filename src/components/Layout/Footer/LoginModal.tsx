@@ -10,13 +10,19 @@ import {
 } from "../../Ui/AlertDialog";
 import { Button } from "../../Ui/Button";
 
-const LoginModal = () => {
+type LoginModalProps = {
+	triggerButton?: React.ReactNode;
+};
+
+const LoginModal = ({ triggerButton }: LoginModalProps) => {
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button className="mb-10 sm:mb-0 animate-fade-in" size="xs">
-					ログイン
-				</Button>
+				{triggerButton || (
+					<Button className="mb-10 sm:mb-0 animate-fade-in" size="xs">
+						ログイン
+					</Button>
+				)}
 			</AlertDialogTrigger>
 			<AlertDialogContent size="xs">
 				<div className="flex justify-between item-center">

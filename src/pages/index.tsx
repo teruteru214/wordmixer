@@ -1,39 +1,30 @@
-import {} from "@/components/Ui/Tabs";
-import type { TextsProps } from "@/types/text";
-import type { GetServerSideProps } from "next";
-import InputWithSearch from "./components/InputWithSearch";
-import TextCard from "./components/TextCard";
+import LoginModal from "@/components/Layout/Footer/LoginModal";
+import { Button } from "@/components/Ui/Button";
+import worker from "@/public/worker.webp";
+import Image from "next/image";
 
-const Home = ({ texts }: TextsProps) => {
+const Home = () => {
 	return (
 		<div className="max-w-5xl mx-auto">
-			<div className="mx-2 sm:mx-6">
-				<div className="my-5">
-					<InputWithSearch />
-					<h3 className="text-2xl mt-7 mb-3 font-bold">Latest</h3>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-3 animate-fade-up">
-						{texts.map((text) => (
-							<TextCard key={text.id} text={text} />
-						))}
-					</div>
-				</div>
+			<div className="flex flex-col justify-center items-center mx-2 sm:mx-6 min-h-screen space-y-4">
+				<h1 className="text-3xl text-center">苦手な英単語、まとめて克服</h1>
+				<p className="text-gray-400">
+					英単語を元に生成した例文で、翻訳して単語の使い方を学ぶツール
+				</p>
+				<Image src={worker} alt="worker" height={100} />
+				<LoginModal
+					triggerButton={
+						<Button className="text-lg w-56" size="lg">
+							学習を始める
+						</Button>
+					}
+				/>
+				<p className="text-gray-400 cursor-pointer hover:underline">
+					本アプリの使い方→
+				</p>
 			</div>
 		</div>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-	const { req } = context;
-	const baseUrl = req ? `http://${req.headers.host}` : "";
-
-	const res = await fetch(`${baseUrl}/api/texts/texts-latest`);
-	const texts = await res.json();
-
-	return {
-		props: {
-			texts,
-		},
-	};
 };
 
 export default Home;

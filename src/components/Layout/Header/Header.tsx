@@ -11,6 +11,10 @@ const Header = () => {
 		router.push("/search");
 	};
 
+	const handleHomeClick = () => {
+		router.push("/");
+	};
+
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (e.key === "Enter" || e.key === " ") {
 			handleSearchClick();
@@ -22,8 +26,13 @@ const Header = () => {
 			<div className="max-w-7xl mx-auto">
 				<div className="grid grid-cols-1 items-center p-2 sm:mx-4">
 					<div className="flex justify-between w-full">
-						<div className="flex items-center">
-							<Image src={logo} alt="logo" height={35} />
+						<div className="flex items-center cursor-pointer">
+							<Image
+								src={logo}
+								alt="logo"
+								height={35}
+								onClick={handleHomeClick}
+							/>
 						</div>
 						<div className="flex item-center">
 							<div
