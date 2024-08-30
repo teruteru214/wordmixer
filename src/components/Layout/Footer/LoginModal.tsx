@@ -1,4 +1,3 @@
-import {} from "@/components/Ui/Form";
 import { IconBrandGoogle, IconX } from "@tabler/icons-react";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -7,32 +6,36 @@ import {
 	AlertDialog,
 	AlertDialogCancel,
 	AlertDialogContent,
-	AlertDialogHeader,
-	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "../../Ui/AlertDialog";
 import { Button } from "../../Ui/Button";
 
-const LoginModal = () => {
+type LoginModalProps = {
+	triggerButton?: React.ReactNode;
+};
+
+const LoginModal = ({ triggerButton }: LoginModalProps) => {
 	return (
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button className="mr-2" size="xs">
-					ログイン
-				</Button>
+				{triggerButton || (
+					<Button className="mb-10 sm:mb-0 animate-fade-in" size="xs">
+						ログイン
+					</Button>
+				)}
 			</AlertDialogTrigger>
-			<AlertDialogContent>
-				<AlertDialogHeader>
-					<AlertDialogTitle>ログイン</AlertDialogTitle>
+			<AlertDialogContent size="xs">
+				<div className="flex justify-between item-center">
+					<h2 className="text-lg text-center">ログイン</h2>
 					<AlertDialogCancel>
 						<IconX />
 					</AlertDialogCancel>
-				</AlertDialogHeader>
+				</div>
 				<div className="flex justify-center">
-					<Image src={logo} alt="logo" width={300} />
+					<Image src={logo} alt="logo" width={250} />
 				</div>
 				<p className="text-sm">
-					覚えたい英単語を元に文章を作成し、翻訳するサービスです
+					覚えたい英単語を元に文章を生成し、翻訳して学ぶ学習ツールです
 				</p>
 				<div className="flex flex-col space-y-2">
 					<Button onClick={() => signIn("google")}>

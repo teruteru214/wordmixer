@@ -1,36 +1,63 @@
-import Image from "next/image";
-import logo from "../../../public/logo.webp";
+import { userAtom } from "@/store/userAtom";
+import { useSetAtom } from "jotai";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import LoginModal from "./LoginModal";
+import LogoutModal from "./LogoutModal";
 
 const Footer = () => {
+	const { data: session, status } = useSession();
+
+	const setUser = useSetAtom(userAtom);
+
+	useEffect(() => {
+		if (session?.user?.email) {
+			fetch("/api/user", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ email: session.user.email }),
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					setUser(data.user);
+				})
+				.catch((error) => {
+					console.error("Failed to fetch user data:", error);
+					setUser(null);
+				});
+		} else {
+			setUser(null);
+		}
+	}, [session, setUser]);
+
 	return (
-		<footer className="p-2 border-t border-gray-200 sm:px-10">
-			<div className="max-w-7xl mx-auto">
-				<div className="sm:mx-4">
-					<div className="flex justify-between">
-						<menu className="text-left text-xs sm:text-base">
-							<li className="text-gray-400 hover:underline">
-								本サービスについて
-							</li>
-						</menu>
-						<menu className="text-left text-xs sm:text-base">
-							<li className="text-gray-400 hover:underline">利用規約</li>
-							<li className="text-gray-400 hover:underline">
-								プライバシーポリシー
-							</li>
-							<li className="text-gray-400 hover:underline">お問い合わせ</li>
-						</menu>
-						<menu className="text-left text-xs sm:text-base">
-							<li className="text-gray-400 hover:underline">Xアカウント</li>
-							<li className="text-gray-400 hover:underline">Github</li>
-							<li className="text-gray-400 hover:underline">Qiita記事</li>
-						</menu>
+		<footer className="h-[400px] sm:h-[200px]">
+			<div className="max-w-7xl mx-auto h-full flex items-center justify-center">
+				<div className="w-full mx-2 sm:mx-7">
+					<div className="sm:flex">
+						{status !== "loading" &&
+							(session ? <LogoutModal /> : <LoginModal />)}
+						<div className="ml-auto flex space-x-7 sm:space-x-20">
+							<menu className="text-left">
+								<li className="text-gray-400 hover:underline hover:cursor-pointer">
+									本サービスについて
+								</li>
+							</menu>
+							<menu className="text-left space-y-3">
+								<li className="text-gray-400 hover:underline hover:cursor-pointer">
+									利用規約
+								</li>
+								<li className="text-gray-400 hover:underline hover:cursor-pointer">
+									プライバシーポリシー
+								</li>
+								<li className="text-gray-400 hover:underline hover:cursor-pointer">
+									お問い合わせ
+								</li>
+							</menu>
+						</div>
 					</div>
-					<div className="flex justify-center my-3">
-						<Image src={logo} alt="logo" height={50} />
-					</div>
-					<p className="text-xs sm:text-base text-center text-gray-400 mb-3">
-						@2024 WordMixer All Rights
-					</p>
 				</div>
 			</div>
 		</footer>

@@ -1,5 +1,6 @@
 import Footer from "@/components/Layout/Footer/Footer";
 import Header from "@/components/Layout/Header/Header";
+import Menu from "@/components/Layout/Menu";
 import Providers from "@/provider/Providers";
 import "@/styles/globals.css";
 import type { Session } from "next-auth";
@@ -19,8 +20,11 @@ export default function App({
 		<main className={`${roboto.className}`}>
 			<Providers session={pageProps.session}>
 				<Header />
-				<Component {...pageProps} />
+				<div className="bg-gray-100">
+					<Component {...pageProps} />
+				</div>
 				<Footer />
+				<Menu />
 			</Providers>
 		</main>
 	);

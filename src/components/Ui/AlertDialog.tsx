@@ -3,6 +3,30 @@ import * as React from "react";
 
 import { buttonVariants } from "@/components/Ui/Button";
 import { cn } from "@/lib/utils";
+import { type VariantProps, cva } from "class-variance-authority";
+
+const alertDialogContentVariants = cva(
+	"fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background rounded-lg p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+	{
+		variants: {
+			size: {
+				xs: "max-w-xs",
+				sm: "max-w-sm",
+				md: "max-w-md",
+				lg: "max-w-lg",
+				xl: "max-w-xl",
+				"2xl": "max-w-2xl",
+			},
+		},
+		defaultVariants: {
+			size: "md",
+		},
+	},
+);
+
+interface AlertDialogContentProps
+	extends React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>,
+		VariantProps<typeof alertDialogContentVariants> {}
 
 const AlertDialog = AlertDialogPrimitive.Root;
 
@@ -16,7 +40,7 @@ const AlertDialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<AlertDialogPrimitive.Overlay
 		className={cn(
-			"fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+			"fixed inset-0 z-50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
 			className,
 		)}
 		{...props}
@@ -27,16 +51,13 @@ AlertDialogOverlay.displayName = AlertDialogPrimitive.Overlay.displayName;
 
 const AlertDialogContent = React.forwardRef<
 	React.ElementRef<typeof AlertDialogPrimitive.Content>,
-	React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
->(({ className, ...props }, ref) => (
+	AlertDialogContentProps
+>(({ className, size, ...props }, ref) => (
 	<AlertDialogPortal>
 		<AlertDialogOverlay />
 		<AlertDialogPrimitive.Content
 			ref={ref}
-			className={cn(
-				"fixed left-[50%] top-[50%] z-50 grid w-full max-w-xs translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background rounded-lg p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:max-w-md",
-				className,
-			)}
+			className={cn(alertDialogContentVariants({ size }), className)}
 			{...props}
 		/>
 	</AlertDialogPortal>
