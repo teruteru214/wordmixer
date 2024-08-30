@@ -23,7 +23,7 @@ const Menu = () => {
 	const user = useAtomValue(userAtom);
 	const router = useRouter();
 
-	const normalizedUserName = user?.name.replace(/\s+/g, "").toLowerCase();
+	const normalizedUserName = user?.name?.replace(/\s+/g, "").toLowerCase();
 
 	const navigateTo = (path: string) => {
 		router.push(path);
@@ -31,7 +31,7 @@ const Menu = () => {
 
 	if (session) {
 		return (
-			<menu className="fixed bottom-0 left-0 mb-12 ml-2 sm:ml-6 border flex space-x-2 p-2 rounded-lg drop-shadow-lg animate-fade-in bg-white">
+			<nav className="fixed bottom-0 left-0 mb-12 ml-2 sm:ml-6 border flex space-x-2 p-2 rounded-lg drop-shadow-lg animate-fade-in bg-white">
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
@@ -123,7 +123,7 @@ const Menu = () => {
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
-			</menu>
+			</nav>
 		);
 	}
 	return null;
