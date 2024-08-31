@@ -18,7 +18,10 @@ const LogoutModal = () => {
 			<AlertDialogContent size="xs">
 				<p className="text-center">ログアウトしますか？</p>
 				<div className="flex flex-col space-y-2">
-					<Button onClick={() => signOut()} variant="outline">
+					<Button
+						onClick={() => signOut({ callbackUrl: "/" })}
+						variant="outline"
+					>
 						ログアウト
 					</Button>
 					<AlertDialogCancel>

@@ -38,7 +38,7 @@ const LoginModal = ({ triggerButton }: LoginModalProps) => {
 					覚えたい英単語を元に文章を生成し、翻訳して学ぶ学習ツールです
 				</p>
 				<div className="flex flex-col space-y-2">
-					<Button onClick={() => signIn("google")}>
+					<Button onClick={() => signIn("google", { callbackUrl: "/user" })}>
 						<IconBrandGoogle className="mr-2" />
 						Googleアカウントで新規登録
 					</Button>
