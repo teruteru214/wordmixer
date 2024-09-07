@@ -1,4 +1,4 @@
-export interface Text {
+export interface SelectText {
 	id: number;
 	user_id: number;
 	level: string;
@@ -7,11 +7,22 @@ export interface Text {
 	ja: string;
 	words: string[];
 }
-
-export interface TextProps {
+export interface Text {
+	id: number;
+	user_id: number;
+	words: string[];
+	level: string;
+	theme: string;
+}
+export interface TextProp {
 	text: Text;
 }
 
-export interface TextsProps {
+export interface TextProps {
 	texts: Text[];
+}
+export interface UserTextProps {
+	username: string;
+	texts: Text[];
+	currentPage: number;
 }

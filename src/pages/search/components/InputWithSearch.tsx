@@ -4,26 +4,33 @@ import { cn } from "@/lib/utils";
 import { IconSearch } from "@tabler/icons-react";
 import words from "an-array-of-english-words";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 interface InputWithSearchProps
 	extends React.InputHTMLAttributes<HTMLInputElement> {
 	initialValue?: string;
+	q?: string;
 }
 
 const InputWithSearch = React.forwardRef<
 	HTMLInputElement,
 	InputWithSearchProps
->(({ className, onKeyDown, onChange, initialValue = "", ...props }, ref) => {
+>(({ className, onKeyDown, onChange, initialValue = "", q, ...props }, ref) => {
 	const [inputValue, setInputValue] = useState(initialValue);
 	const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
 	const router = useRouter();
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === "Enter" && inputValue.trim() !== "") {
 			e.preventDefault();
 			router.push(`/search?q=${inputValue}`);
 			setFilteredSuggestions([]);
+
+			if (inputRef.current) {
+				inputRef.current.blur();
+			}
+
 			if (onKeyDown) onKeyDown(e);
 		}
 	};
@@ -62,6 +69,8 @@ const InputWithSearch = React.forwardRef<
 		}
 	};
 
+	const showBadge = inputValue && (!q || inputValue !== q);
+
 	return (
 		<div className="relative w-full">
 			<BaseInput
@@ -76,7 +85,7 @@ const InputWithSearch = React.forwardRef<
 				ref={ref}
 				{...props}
 			/>
-			{inputValue && (
+			{showBadge && (
 				<Badge
 					className="absolute right-2 top-1/2 transform -translate-y-1/2 hidden md:block"
 					variant="secondary"

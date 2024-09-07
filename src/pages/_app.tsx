@@ -20,7 +20,7 @@ export default function App({
 		<main className={`${roboto.className}`}>
 			<Providers session={pageProps.session}>
 				<Header />
-				<div className="bg-gray-100">
+				<div className="bg-blue-50">
 					<Component {...pageProps} />
 				</div>
 				<Footer />

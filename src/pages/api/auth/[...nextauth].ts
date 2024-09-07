@@ -28,6 +28,7 @@ export const authOptions: NextAuthOptions = {
 		strategy: "jwt",
 		maxAge: 90 * 24 * 60 * 60,
 	},
+	secret: process.env.NEXTAUTH_SECRET,
 	callbacks: {
 		async session({ session }) {
 			if (session.user?.email) {
@@ -40,7 +41,6 @@ export const authOptions: NextAuthOptions = {
 			}
 			return session;
 		},
-
 		async jwt({ token, user }) {
 			if (user) {
 				const existingUser = await prisma.user.findUnique({

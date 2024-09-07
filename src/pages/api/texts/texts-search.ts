@@ -9,7 +9,7 @@ export default async function handler(
 		return res.status(405).json({ message: "Method not allowed" });
 	}
 
-	const { q } = req.query;
+	const { q, skip, limit } = req.query;
 
 	if (!q || typeof q !== "string") {
 		return res.status(400).json({ message: "Invalid query parameter" });
@@ -46,6 +46,8 @@ export default async function handler(
 					},
 				},
 			},
+			skip: Number(skip) || 0,
+			take: Number(limit) || 30,
 		});
 
 		const formattedTexts = texts.map((text) => ({

@@ -1,20 +1,35 @@
-import type { TextsProps } from "@/types/text";
+import type { TextProps } from "@/types/text";
 
+import {
+	Pagination,
+	PaginationContent,
+	PaginationItem,
+	PaginationNext,
+	PaginationPrevious,
+} from "@/components/Ui/Pagination";
 import type { GetServerSideProps } from "next";
-import TextCard from "../components/TextCard";
+import { useRouter } from "next/router";
+import TextTable from "../components/TextTable";
 import InputWithSearch from "./components/InputWithSearch";
 
-interface SearchPageProps extends TextsProps {
+interface SearchPageProps extends TextProps {
 	q: string;
+	currentPage: number;
 }
 
-const Search = ({ texts, q }: SearchPageProps) => {
+const Search = ({ texts, q, currentPage }: SearchPageProps) => {
+	const router = useRouter();
+
+	const handlePageChange = (newPage: number) => {
+		router.push(`/search?q=${q}&page=${newPage}`);
+	};
+
 	if (!q) {
 		return (
 			<div className="max-w-5xl mx-auto">
 				<div className="mx-2 sm:mx-6">
 					<div className="pt-5 min-h-screen">
-						<InputWithSearch />
+						<InputWithSearch q={q} />
 					</div>
 				</div>
 			</div>
@@ -25,25 +40,41 @@ const Search = ({ texts, q }: SearchPageProps) => {
 		<div className="max-w-5xl mx-auto">
 			<div className="mx-2 sm:mx-6">
 				<div className="pt-5 min-h-screen">
-					<InputWithSearch />
+					<InputWithSearch q={q} />
 					{texts.length > 0 ? (
-						<>
-							<h3 className="text-3xl mt-7 mb-3 font-bold">#{q}</h3>
-							<div
-								className="grid grid-cols-2 md:grid-cols-3 gap-3 animate-fade-up"
-								key={q}
-							>
-								{texts.map((text) => (
-									<TextCard key={text.id} text={text} />
-								))}
+						<div className="animate-fade-up">
+							<h3 className="text-3xl mt-7 font-bold">#{q}</h3>
+							<div className="pt-2">
+								<TextTable texts={texts} />
 							</div>
-						</>
+							<div className="py-4">
+								<Pagination>
+									<PaginationContent>
+										{currentPage > 1 && (
+											<PaginationItem>
+												<PaginationPrevious
+													onClick={() => handlePageChange(currentPage - 1)}
+												/>
+											</PaginationItem>
+										)}
+										{texts.length === 30 && (
+											<PaginationItem>
+												<PaginationNext
+													onClick={() => handlePageChange(currentPage + 1)}
+												/>
+											</PaginationItem>
+										)}
+									</PaginationContent>
+								</Pagination>
+							</div>
+						</div>
 					) : (
 						<p
 							className="text-gray-400 font-bold text-center mt-12 animate-fade-up"
 							key={q}
 						>
-							{q}の検索結果が見つかりませんでした
+							{q}
+							の検索結果が見つかりませんでした。
 						</p>
 					)}
 				</div>
@@ -54,7 +85,11 @@ const Search = ({ texts, q }: SearchPageProps) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 	const { query } = context;
-	const { q } = query;
+	const { q, page } = query;
+
+	const limit = 30;
+	const currentPage = page ? Number(page) : 1;
+	const skip = (currentPage - 1) * limit;
 
 	if (!q || typeof q !== "string") {
 		return {
@@ -67,7 +102,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 	const baseUrl = `http://${context.req.headers.host}`;
 	const res = await fetch(
-		`${baseUrl}/api/texts/texts-search?q=${encodeURIComponent(q)}`,
+		`${baseUrl}/api/texts/texts-search?q=${encodeURIComponent(q)}&skip=${skip}&limit=${limit}`,
 	);
 
 	if (!res.ok) {
@@ -75,6 +110,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			props: {
 				texts: [],
 				q,
+				currentPage,
 			},
 		};
 	}
@@ -85,6 +121,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 		props: {
 			texts,
 			q,
+			currentPage,
 		},
 	};
 };
