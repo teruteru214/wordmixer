@@ -19,7 +19,6 @@ interface SearchPageProps extends TextProps {
 
 const Search = ({ texts, q, currentPage }: SearchPageProps) => {
 	const router = useRouter();
-	console.log(currentPage);
 
 	const handlePageChange = (newPage: number) => {
 		router.push(`/search?q=${q}&page=${newPage}`);
@@ -30,7 +29,7 @@ const Search = ({ texts, q, currentPage }: SearchPageProps) => {
 			<div className="max-w-5xl mx-auto">
 				<div className="mx-2 sm:mx-6">
 					<div className="pt-5 min-h-screen">
-						<InputWithSearch />
+						<InputWithSearch q={q} />
 					</div>
 				</div>
 			</div>
@@ -41,7 +40,7 @@ const Search = ({ texts, q, currentPage }: SearchPageProps) => {
 		<div className="max-w-5xl mx-auto">
 			<div className="mx-2 sm:mx-6">
 				<div className="pt-5 min-h-screen">
-					<InputWithSearch />
+					<InputWithSearch q={q} />
 					{texts.length > 0 ? (
 						<div className="animate-fade-up">
 							<h3 className="text-3xl mt-7 font-bold">#{q}</h3>
