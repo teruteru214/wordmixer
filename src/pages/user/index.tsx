@@ -18,7 +18,7 @@ const User = ({ username, texts, currentPage }: UserTextProps) => {
 
 	return (
 		<div className="max-w-screen-lg mx-auto">
-			<div className="px-4 py-5 sm:px-4">
+			<div className="mx-2 py-5 sm:mx-6">
 				<div className="flex justify-between items-center">
 					<h1 className="text-2xl font-bold">{username}の文章</h1>
 				</div>
