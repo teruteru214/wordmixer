@@ -1,3 +1,4 @@
+import { Button } from "@/components/Ui/Button";
 import {
 	Table,
 	TableBody,
@@ -6,10 +7,38 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/Ui/Table";
+import reading from "@/public/reading.webp";
 import type { TextProps } from "@/types/text";
-import { IconFlag } from "@tabler/icons-react";
+import { IconFileTextAi, IconFlag } from "@tabler/icons-react";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
-const TextTable = ({ texts }: TextProps) => {
+const TextTable = ({ texts = [] }: TextProps) => {
+	const router = useRouter();
+
+	const handlePageCreate = () => {
+		router.push("/user/create");
+	};
+
+	if (texts.length === 0) {
+		return (
+			<div className="mt-16 mb-96">
+				<div className="flex justify-center">
+					<Image src={reading} alt="No results" height={150} />
+				</div>
+				<p className="mt-16 text-center">
+					英単語をまとめて文章にして覚えよう！
+				</p>
+				<div className="flex justify-center">
+					<Button className="mt-4" size="lg" onClick={handlePageCreate}>
+						<IconFileTextAi className="h-6 w-6 mr-2" />
+						例文を生成する
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<Table>
 			<TableHeader>
