@@ -14,35 +14,19 @@ enum UserRole {
   ADMIN
 }
 
+enum TranslationType {
+  ja
+  en
+}
 model User {
   id           Int      @id @default(autoincrement())
   name         String
   email        String   @unique
   password     String
   subscription UserRole @default(FREE)
-  goods        Good[]
-  solveLaters  SolveLater[]
   memos        Memo[]
   flags        Flag[]
   texts        Text[]
-}
-
-model Good {
-  userId  Int
-  textId  Int
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
-
-  @@id([userId, textId])
-}
-
-model SolveLater {
-  userId  Int
-  textId  Int
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
-
-  @@id([userId, textId])
 }
 
 model Memo {
@@ -71,14 +55,13 @@ model Text {
   en        String
   ja        String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  goods     Good[]
-  solveLaters SolveLater[]
   memos     Memo[]
   flags     Flag[]
   textWords TextWord[]
   textLevels TextLevel[]
   textThemes TextTheme[]
 }
+
 
 model TextWord {
   textId Int
