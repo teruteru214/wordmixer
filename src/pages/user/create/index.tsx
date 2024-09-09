@@ -8,8 +8,7 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/Ui/Form";
-import { Label } from "@/components/Ui/Label";
-import { RadioGroup, RadioGroupItem } from "@/components/Ui/RadioGroup";
+import {} from "@/components/Ui/RadioGroup";
 import {
 	Select,
 	SelectContent,
@@ -79,8 +78,8 @@ export default function Create() {
 				word4: "",
 				word5: "",
 			},
-			level: "very-easy",
-			theme: "business",
+			level: "とても簡単",
+			theme: "ビジネス",
 		},
 	});
 
@@ -153,20 +152,17 @@ export default function Create() {
 								onSubmit={form.handleSubmit(onSubmit)}
 								className="space-y-3"
 							>
-								<div className="flex justify-between items-center">
-									<h1 className="text-3xl font-bold">例文生成</h1>
-									<Button
-										className="text-xs rounded-sm"
-										size="xs"
-										onClick={handleClear}
-									>
-										<IconReload className="w-4 h-4 mr-1" />
-										クリア
-									</Button>
-								</div>
+								<Button
+									className="text-xs rounded-sm"
+									size="xs"
+									onClick={handleClear}
+								>
+									<IconReload className="w-4 h-4 mr-1" />
+									クリア
+								</Button>
 								<div className="flex items-center">
 									<FormLabel className="text-lg">
-										英単語(熟語)を入力してください
+										例文に使う英単語(熟語)を入力してください
 									</FormLabel>
 									<Badge variant="destructive" className="ml-1">
 										必須
@@ -253,48 +249,34 @@ export default function Create() {
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel htmlFor="level" className="text-lg mt-4">
-												難易度を選択してください
+												例文の難易度を選択してください
 											</FormLabel>
 											<FormControl>
-												<RadioGroup
-													id="level"
-													name="level"
-													value={field.value}
+												<Select
 													onValueChange={(value) => field.onChange(value)}
+													value={field.value}
 												>
-													<div className="space-y-2">
-														<div className="flex items-center space-x-1">
-															<RadioGroupItem value="very-easy" id="r1" />
-															<Label htmlFor="r1" className="cursor-pointer">
-																Very Easy
-															</Label>
-														</div>
-														<div className="flex items-center space-x-1">
-															<RadioGroupItem value="easy" id="r2" />
-															<Label htmlFor="r2" className="cursor-pointer">
-																Easy
-															</Label>
-														</div>
-														<div className="flex items-center space-x-1">
-															<RadioGroupItem value="medium" id="r3" />
-															<Label htmlFor="r3" className="cursor-pointer">
-																Medium
-															</Label>
-														</div>
-														<div className="flex items-center space-x-1">
-															<RadioGroupItem value="hard" id="r4" />
-															<Label htmlFor="r4" className="cursor-pointer">
-																Hard
-															</Label>
-														</div>
-														<div className="flex items-center space-x-1">
-															<RadioGroupItem value="very-hard" id="r5" />
-															<Label htmlFor="r5" className="cursor-pointer">
-																Very Hard
-															</Label>
-														</div>
-													</div>
-												</RadioGroup>
+													<SelectTrigger>
+														<SelectValue placeholder="難易度を選択" />
+													</SelectTrigger>
+													<SelectContent>
+														<SelectItem value="とても簡単">
+															とても簡単 (TOEIC 250~400)
+														</SelectItem>
+														<SelectItem value="簡単">
+															簡単 (TOEIC 400~550)
+														</SelectItem>
+														<SelectItem value="普通">
+															普通 (TOEIC 550~700)
+														</SelectItem>
+														<SelectItem value="難しい">
+															難しい (TOEIC 700~850)
+														</SelectItem>
+														<SelectItem value="とても難しい">
+															とても難しい (TOEIC 850~)
+														</SelectItem>
+													</SelectContent>
+												</Select>
 											</FormControl>
 											<FormMessage />
 										</FormItem>
@@ -306,7 +288,7 @@ export default function Create() {
 									render={({ field }) => (
 										<FormItem>
 											<FormLabel htmlFor="themes" className="text-lg mt-4">
-												テーマを選択してください
+												例文のテーマを選択してください
 											</FormLabel>
 											<FormControl>
 												<Select
@@ -317,22 +299,22 @@ export default function Create() {
 														<SelectValue placeholder="テーマを選択" />
 													</SelectTrigger>
 													<SelectContent>
-														<SelectItem value="business">ビジネス</SelectItem>
-														<SelectItem value="travel">旅行</SelectItem>
-														<SelectItem value="health">健康</SelectItem>
-														<SelectItem value="technology">
+														<SelectItem value="ビジネス">ビジネス</SelectItem>
+														<SelectItem value="旅行">旅行</SelectItem>
+														<SelectItem value="健康">健康</SelectItem>
+														<SelectItem value="テクノロジー">
 															テクノロジー
 														</SelectItem>
-														<SelectItem value="education">教育</SelectItem>
-														<SelectItem value="daily-life">日常生活</SelectItem>
-														<SelectItem value="art-and-literature">
+														<SelectItem value="教育">教育</SelectItem>
+														<SelectItem value="日常生活">日常生活</SelectItem>
+														<SelectItem value="アートと文学">
 															アートと文学
 														</SelectItem>
-														<SelectItem value="entertainment">
+														<SelectItem value="エンターテイメント">
 															エンターテイメント
 														</SelectItem>
-														<SelectItem value="environment">環境</SelectItem>
-														<SelectItem value="history">歴史</SelectItem>
+														<SelectItem value="環境">環境</SelectItem>
+														<SelectItem value="歴史">歴史</SelectItem>
 													</SelectContent>
 												</Select>
 											</FormControl>
