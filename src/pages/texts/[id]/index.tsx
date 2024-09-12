@@ -6,11 +6,11 @@ import {
 } from "@/components/Ui/Accordion";
 
 import type { GetStaticProps } from "next";
-import type { ModelSentenceProps } from "../types";
+
+import type { TranslationTextProps } from "@/types/text";
 import Translation from "./components/Translation";
 
-const ModelSentence = ({ textData }: ModelSentenceProps) => {
-	console.table(textData);
+const ModelSentence = ({ textData }: TranslationTextProps) => {
 	return (
 		<div className="max-w-screen-lg mx-auto flex flex-col justify-center items-center h-screen">
 			<div className="mx-2 py-5 sm:mx-6">

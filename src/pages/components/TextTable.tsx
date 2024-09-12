@@ -14,7 +14,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 const TextTable = ({ texts = [] }: TextProps) => {
-	console.log(texts);
 	const router = useRouter();
 
 	const handlePageCreate = () => {
