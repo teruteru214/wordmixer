@@ -119,10 +119,13 @@ export default function Create() {
 				);
 			}
 
+			const { result } = await response.json();
+			const { id } = result;
+
 			setLoading(false);
 			toast({
 				title: "例文を生成しました🎉",
-				description: "Let's Translation",
+				description: "クリックすると翻訳できます",
 				action: (
 					<ToastAction
 						altText="Complate"
@@ -131,12 +134,15 @@ export default function Create() {
 						<IconArrowRight />
 					</ToastAction>
 				),
+				onClick: () => {
+					window.location.href = `/texts/${id}`;
+				},
 			});
 		} catch {
 			setLoading(false);
 			toast({
 				variant: "destructive",
-				title: "例文を生成に失敗しました🙇",
+				title: "例文の生成に失敗しました🙇",
 				description: "もう一度生成し直してください",
 			});
 		}

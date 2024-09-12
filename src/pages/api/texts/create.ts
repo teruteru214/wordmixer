@@ -106,17 +106,11 @@ export default async function handler(
 			},
 		});
 
-		const responseText = {
+		const responseId = {
 			id: newText.id,
-			userId: newText.userId,
-			en: newText.en,
-			ja: newText.ja,
-			words: newText.textWords.map((tw) => tw.word.word),
-			level: newText.textLevels[0]?.level.level || null,
-			theme: newText.textThemes[0]?.theme.theme || null,
 		};
 
-		return res.status(201).json({ result: responseText });
+		return res.status(201).json({ result: responseId });
 	} catch (error) {
 		console.error("Error during AI request or saving text:", error);
 		return res.status(500).json({ message: "Internal server error" });
