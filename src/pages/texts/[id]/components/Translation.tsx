@@ -2,6 +2,7 @@ import { Button } from "@/components/Ui/Button";
 import {} from "@/components/Ui/Form";
 import { Textarea } from "@/components/Ui/Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import DiffMatchPatch from "diff-match-patch";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,6 +19,8 @@ type FormData = z.infer<typeof schema>;
 
 const Translation = ({ ja }: TranslationProps) => {
 	const [showResults, setShowResults] = useState(false);
+	const [highlightedResult, setHighlightedResult] =
+		useState<JSX.Element | null>(null);
 
 	const {
 		handleSubmit,
@@ -28,25 +31,35 @@ const Translation = ({ ja }: TranslationProps) => {
 		resolver: zodResolver(schema),
 	});
 
-	const onSubmit = () => {
-		setShowResults(true);
-	};
+	const highlightMatchWithDiff = (inputText: string, correctText: string) => {
+		const dmp = new DiffMatchPatch();
+		const diff = dmp.diff_main(inputText, correctText);
+		dmp.diff_cleanupSemantic(diff);
 
-	const highlightMatch = (inputText: string, correctText: string) => {
-		const inputWords = inputText.split(/\s+/);
-		const correctWords = correctText.split(/\s+/);
+		return diff.map((part, index) => {
+			const [operation, text] = part;
+			const uniqueKey = `${text}-${index}`;
 
-		return inputWords.map((word, index) => {
-			const uniqueKey = `${word}-${index}`;
-			if (word === correctWords[index]) {
+			if (operation === DiffMatchPatch.DIFF_EQUAL) {
 				return (
 					<span key={uniqueKey} className="bg-yellow-200">
-						{word}{" "}
+						{text}
 					</span>
 				);
 			}
-			return `${word} `;
+			return <span key={uniqueKey}>{text}</span>;
 		});
+	};
+
+	const onSubmit = () => {
+		const inputText = getValues("translation");
+		const highlightedHTML = (
+			<p className="mt-2 p-4 bg-white border rounded break-words">
+				{highlightMatchWithDiff(inputText, ja)}
+			</p>
+		);
+		setHighlightedResult(highlightedHTML);
+		setShowResults(true);
 	};
 
 	return (
@@ -72,13 +85,9 @@ const Translation = ({ ja }: TranslationProps) => {
 			) : (
 				<div className="my-6">
 					<h2 className="text-xl font-bold">あなたの和訳</h2>
-					<p className="mt-2 p-4 bg-white border rounded break-words">
-						{highlightMatch(getValues("translation"), ja)}
-					</p>
+					{highlightedResult}
 					<h2 className="text-xl font-bold mt-4">答え</h2>
-					<p className="mt-2 p-4 bg-white border rounded break-words">
-						{highlightMatch(ja, getValues("translation"))}
-					</p>
+					<p className="mt-2 p-4 bg-white border rounded break-words">{ja}</p>
 				</div>
 			)}
 		</div>
