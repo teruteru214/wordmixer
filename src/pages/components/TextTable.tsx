@@ -20,6 +20,10 @@ const TextTable = ({ texts = [] }: TextProps) => {
 		router.push("/user/create");
 	};
 
+	const handleRowClick = (id: number) => {
+		router.push(`/texts/${id}`);
+	};
+
 	if (texts.length === 0) {
 		return (
 			<div className="mt-16 mb-96">
@@ -51,7 +55,11 @@ const TextTable = ({ texts = [] }: TextProps) => {
 			</TableHeader>
 			<TableBody>
 				{texts.map((text) => (
-					<TableRow key={text.id}>
+					<TableRow
+						key={text.id}
+						onClick={() => handleRowClick(text.id)}
+						className="cursor-pointer hover:bg-gray-100"
+					>
 						<TableCell className="max-w-[18rem] truncate">
 							{text?.words.map((word) => `#${word}`).join(" ")}
 						</TableCell>

@@ -26,3 +26,16 @@ export interface UserTextProps {
 	texts: Text[];
 	currentPage: number;
 }
+
+interface TranslationText {
+	id: number;
+	en: string;
+	ja: string;
+	words: string[];
+	level: string;
+	theme: string;
+}
+
+export interface TranslationTextProps {
+	textData: TranslationText;
+}
