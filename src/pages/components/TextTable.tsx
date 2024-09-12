@@ -14,10 +14,15 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 const TextTable = ({ texts = [] }: TextProps) => {
+	console.log(texts);
 	const router = useRouter();
 
 	const handlePageCreate = () => {
 		router.push("/user/create");
+	};
+
+	const handleRowClick = (id: number) => {
+		router.push(`/texts/${id}`);
 	};
 
 	if (texts.length === 0) {
@@ -51,7 +56,11 @@ const TextTable = ({ texts = [] }: TextProps) => {
 			</TableHeader>
 			<TableBody>
 				{texts.map((text) => (
-					<TableRow key={text.id}>
+					<TableRow
+						key={text.id}
+						onClick={() => handleRowClick(text.id)}
+						className="cursor-pointer hover:bg-gray-100"
+					>
 						<TableCell className="max-w-[18rem] truncate">
 							{text?.words.map((word) => `#${word}`).join(" ")}
 						</TableCell>
