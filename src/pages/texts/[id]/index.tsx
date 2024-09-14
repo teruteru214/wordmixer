@@ -5,16 +5,52 @@ import {
 	AccordionTrigger,
 } from "@/components/Ui/Accordion";
 
-import type { GetStaticProps } from "next";
-
+import { Button } from "@/components/Ui/Button";
 import type { TranslationTextProps } from "@/types/text";
+import { IconPlayerPauseFilled, IconVolume } from "@tabler/icons-react";
+import type { GetStaticProps } from "next";
+import { useCallback, useState } from "react";
 import Translation from "./components/Translation";
 
 const ModelSentence = ({ textData }: TranslationTextProps) => {
+	const [isSpeaking, setIsSpeaking] = useState(false);
+
+	const speakText = useCallback(() => {
+		const utterance = new SpeechSynthesisUtterance(textData.en);
+		utterance.lang = "en-US";
+		utterance.rate = 1;
+
+		setIsSpeaking(true);
+
+		utterance.onend = () => {
+			setIsSpeaking(false);
+		};
+
+		speechSynthesis.speak(utterance);
+	}, [textData.en]);
+
+	const stopSpeaking = useCallback(() => {
+		speechSynthesis.cancel();
+		setIsSpeaking(false);
+	}, []);
+
 	return (
 		<div className="max-w-screen-lg mx-auto flex flex-col justify-center items-center h-screen">
-			<div className="mx-2 py-5 sm:mx-6">
+			<div className="mx-2 py-5 sm:mx-6 space-y-4">
 				<p className="text-xl">{textData.en}</p>
+				<div className="flex justify-between items-center">
+					<Button
+						className="rounded-md"
+						size="icon"
+						onClick={isSpeaking ? stopSpeaking : speakText}
+					>
+						{isSpeaking ? (
+							<IconPlayerPauseFilled className="text-white stroke-1" />
+						) : (
+							<IconVolume className="text-white stroke-1" />
+						)}
+					</Button>
+				</div>
 				<Translation ja={textData.ja} />
 				<Accordion type="single" collapsible className="w-full">
 					<AccordionItem value="item-1">
