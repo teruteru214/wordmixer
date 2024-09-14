@@ -34,7 +34,6 @@
 		"an-array-of-english-words": "^2.0.0",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
-		"diff-match-patch": "^1.0.5",
 		"jotai": "^2.9.1",
 		"next": "14.2.4",
 		"next-auth": "^4.24.7",
