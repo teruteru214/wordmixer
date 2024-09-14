@@ -4,7 +4,6 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/Ui/Tooltip";
-import { userAtom } from "@/store/userAtom";
 import {
 	IconCards,
 	IconChartBar,
@@ -12,18 +11,14 @@ import {
 	IconFlag,
 	IconHome,
 	IconPencil,
-	IconSquareCheck,
+	IconSearch,
 } from "@tabler/icons-react";
-import { useAtomValue } from "jotai";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Menu = () => {
 	const { data: session } = useSession();
-	const user = useAtomValue(userAtom);
 	const router = useRouter();
-
-	const normalizedUserName = user?.name?.replace(/\s+/g, "").toLowerCase();
 
 	const navigateTo = (path: string) => {
 		router.push(path);
@@ -37,7 +32,7 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconHome
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}`)}
+								onClick={() => navigateTo("/")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
@@ -50,7 +45,7 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconFileTextAi
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/create`)}
+								onClick={() => navigateTo("/user/create")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
@@ -61,13 +56,13 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconSquareCheck
+							<IconSearch
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/check`)}
+								onClick={() => navigateTo("/search")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
-							<p className="text-gray-400">あとで翻訳</p>
+							<p className="text-gray-400">英単語を検索</p>
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
@@ -76,7 +71,7 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconFlag
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/flags`)}
+								onClick={() => navigateTo("user/flags")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
@@ -89,11 +84,11 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconPencil
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/memo`)}
+								onClick={() => navigateTo("/user/memo")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
-							<p className="text-gray-400">メモした例文</p>
+							<p className="text-gray-400">メモ</p>
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
@@ -102,7 +97,7 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconCards
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/vocaburary`)}
+								onClick={() => navigateTo("/user/words")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
@@ -115,7 +110,7 @@ const Menu = () => {
 						<TooltipTrigger asChild>
 							<IconChartBar
 								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo(`/${normalizedUserName}/records`)}
+								onClick={() => navigateTo("/user/records")}
 							/>
 						</TooltipTrigger>
 						<TooltipContent>
