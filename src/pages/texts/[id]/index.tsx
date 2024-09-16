@@ -153,7 +153,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	const textData = await res.json();
 
-	if (!textData) {
+	if (!textData || !textData.words || !Array.isArray(textData.words)) {
 		return {
 			notFound: true,
 		};
