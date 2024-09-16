@@ -11,33 +11,26 @@ import reading from "@/public/reading.webp";
 import type { TextProps } from "@/types/text";
 import { IconFileTextAi, IconFlag } from "@tabler/icons-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 const TextTable = ({ texts = [] }: TextProps) => {
 	const router = useRouter();
 
-	const handlePageCreate = () => {
-		router.push("/user/create");
-	};
-
-	const handleRowClick = (id: number) => {
-		router.push(`/texts/${id}`);
-	};
-
 	if (texts.length === 0) {
 		return (
-			<div className="mt-16 mb-96">
+			<div className="h-screen flex flex-col justify-center items-center space-y-4">
 				<div className="flex justify-center">
 					<Image src={reading} alt="No results" height={150} />
 				</div>
-				<p className="mt-16 text-center">
-					英単語をまとめて文章にして覚えよう！
-				</p>
+				<p className="text-center">英単語をまとめて文章にして覚えよう！</p>
 				<div className="flex justify-center">
-					<Button className="mt-4" size="lg" onClick={handlePageCreate}>
-						<IconFileTextAi className="h-6 w-6 mr-2" />
-						例文を生成する
-					</Button>
+					<Link href="/user/create">
+						<Button className="mt-4" size="lg">
+							<IconFileTextAi className="h-6 w-6 mr-2" />
+							例文を生成する
+						</Button>
+					</Link>
 				</div>
 			</div>
 		);
@@ -57,7 +50,7 @@ const TextTable = ({ texts = [] }: TextProps) => {
 				{texts.map((text) => (
 					<TableRow
 						key={text.id}
-						onClick={() => handleRowClick(text.id)}
+						onClick={() => router.push(`/texts/${text.id}`)}
 						className="cursor-pointer hover:bg-gray-100"
 					>
 						<TableCell className="max-w-[18rem] truncate">

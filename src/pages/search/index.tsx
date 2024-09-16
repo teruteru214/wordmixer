@@ -1,5 +1,3 @@
-import type { TextProps } from "@/types/text";
-
 import {
 	Pagination,
 	PaginationContent,
@@ -7,8 +5,9 @@ import {
 	PaginationNext,
 	PaginationPrevious,
 } from "@/components/Ui/Pagination";
+import type { TextProps } from "@/types/text";
 import type { GetServerSideProps } from "next";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import TextTable from "../components/TextTable";
 import InputWithSearch from "./components/InputWithSearch";
 
@@ -18,12 +17,6 @@ interface SearchPageProps extends TextProps {
 }
 
 const Search = ({ texts, q, currentPage }: SearchPageProps) => {
-	const router = useRouter();
-
-	const handlePageChange = (newPage: number) => {
-		router.push(`/search?q=${q}&page=${newPage}`);
-	};
-
 	if (!q) {
 		return (
 			<div className="max-w-5xl mx-auto">
@@ -52,16 +45,22 @@ const Search = ({ texts, q, currentPage }: SearchPageProps) => {
 									<PaginationContent>
 										{currentPage > 1 && (
 											<PaginationItem>
-												<PaginationPrevious
-													onClick={() => handlePageChange(currentPage - 1)}
-												/>
+												<Link
+													href={`/search?q=${q}&page=${currentPage - 1}`}
+													passHref
+												>
+													<PaginationPrevious />
+												</Link>
 											</PaginationItem>
 										)}
 										{texts.length === 30 && (
 											<PaginationItem>
-												<PaginationNext
-													onClick={() => handlePageChange(currentPage + 1)}
-												/>
+												<Link
+													href={`/search?q=${q}&page=${currentPage + 1}`}
+													passHref
+												>
+													<PaginationNext />
+												</Link>
 											</PaginationItem>
 										)}
 									</PaginationContent>
