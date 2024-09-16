@@ -1,5 +1,4 @@
 import Footer from "@/components/Layout/Footer/Footer";
-import Header from "@/components/Layout/Header/Header";
 import Menu from "@/components/Layout/Menu";
 import Providers from "@/provider/Providers";
 import "@/styles/globals.css";
@@ -19,7 +18,6 @@ export default function App({
 	return (
 		<main className={`${roboto.className}`}>
 			<Providers session={pageProps.session}>
-				<Header />
 				<div className="bg-blue-100">
 					<Component {...pageProps} />
 				</div>

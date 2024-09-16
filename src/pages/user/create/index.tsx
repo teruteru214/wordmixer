@@ -8,7 +8,6 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/Ui/Form";
-import {} from "@/components/Ui/RadioGroup";
 import {
 	Select,
 	SelectContent,
@@ -18,11 +17,14 @@ import {
 } from "@/components/Ui/Select";
 import { ToastAction } from "@/components/Ui/Toast";
 import { useToast } from "@/components/Ui/hooks/useToast";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { userAtom } from "@/store/userAtom";
 import styles from "@/styles/writing.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconArrowRight, IconReload } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
+import type { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -357,3 +359,20 @@ export default function Create() {
 		</div>
 	);
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	const session = await getServerSession(context.req, context.res, authOptions);
+
+	if (!session) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
+	}
+
+	return {
+		props: {},
+	};
+};

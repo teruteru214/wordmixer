@@ -7,6 +7,8 @@ import {
 } from "@/components/Ui/Pagination";
 import type { UserTextProps } from "@/types/text";
 import type { GetServerSideProps } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 import TextTable from "../components/TextTable";
 
 const User = ({ username, texts, currentPage }: UserTextProps) => {
@@ -51,15 +53,28 @@ const User = ({ username, texts, currentPage }: UserTextProps) => {
 export default User;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-	const page = Number(context.query.page) || 1;
+	const session = await getServerSession(context.req, context.res, authOptions);
 
+	if (!session || !session.user?.email) {
+		return {
+			redirect: {
+				destination: "/",
+				permanent: false,
+			},
+		};
+	}
+
+	const page = Number(context.query.page) || 1;
 	const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/texts/user-texts?page=${page}`;
 
 	const res = await fetch(apiUrl, {
-		method: "GET",
+		method: "POST",
 		headers: {
-			Cookie: context.req.headers.cookie || "",
+			"Content-Type": "application/json",
 		},
+		body: JSON.stringify({
+			email: session.user.email,
+		}),
 	});
 
 	const userText = await res.json();
