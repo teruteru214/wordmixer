@@ -8,21 +8,15 @@ import {
 	IconCards,
 	IconChartBar,
 	IconFileTextAi,
-	IconFlag,
 	IconHome,
 	IconPencil,
 	IconSearch,
 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Menu = () => {
 	const { data: session } = useSession();
-	const router = useRouter();
-
-	const navigateTo = (path: string) => {
-		router.push(path);
-	};
 
 	if (session) {
 		return (
@@ -30,10 +24,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconHome
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/")}
-							/>
+							<Link href="/">
+								<IconHome className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">作成した例文</p>
@@ -43,10 +36,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconFileTextAi
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/user/create")}
-							/>
+							<Link href="/user/create">
+								<IconFileTextAi className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">例文を作成</p>
@@ -56,10 +48,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconSearch
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/search")}
-							/>
+							<Link href="/search">
+								<IconSearch className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">英単語を検索</p>
@@ -69,23 +60,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconFlag
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("user/flags")}
-							/>
-						</TooltipTrigger>
-						<TooltipContent>
-							<p className="text-gray-400">翻訳した例文</p>
-						</TooltipContent>
-					</Tooltip>
-				</TooltipProvider>
-				<TooltipProvider>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<IconPencil
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/user/memo")}
-							/>
+							<Link href="/user/memo">
+								<IconPencil className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">メモ</p>
@@ -95,10 +72,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconCards
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/user/words")}
-							/>
+							<Link href="/user/words">
+								<IconCards className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">単語帳</p>
@@ -108,10 +84,9 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<IconChartBar
-								className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]"
-								onClick={() => navigateTo("/user/records")}
-							/>
+							<Link href="/user/records">
+								<IconChartBar className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
+							</Link>
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">学習記録</p>
