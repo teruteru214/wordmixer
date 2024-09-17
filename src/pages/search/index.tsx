@@ -8,8 +8,8 @@ import {
 import type { TextProps } from "@/types/text";
 import type { GetServerSideProps } from "next";
 import Link from "next/link";
-import TextTable from "../components/TextTable";
 import InputWithSearch from "./components/InputWithSearch";
+import SearchTable from "./components/SearchTable";
 
 interface SearchPageProps extends TextProps {
 	q: string;
@@ -38,7 +38,7 @@ const Search = ({ texts, q, currentPage }: SearchPageProps) => {
 						<div className="animate-fade-up">
 							<h3 className="text-3xl mt-7 font-bold">#{q}</h3>
 							<div className="pt-2">
-								<TextTable texts={texts} />
+								<SearchTable texts={texts} />
 							</div>
 							<div className="py-4">
 								<Pagination>
