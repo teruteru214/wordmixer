@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const TextTable = ({ texts = [] }: TextProps) => {
+	console.table(texts);
 	const router = useRouter();
 
 	if (texts.length === 0) {
@@ -59,7 +60,9 @@ const TextTable = ({ texts = [] }: TextProps) => {
 						<TableCell className="hidden md:table-cell">{text.level}</TableCell>
 						<TableCell className="hidden md:table-cell">{text.theme}</TableCell>
 						<TableCell>
-							<IconFlag className="h-6 w-6 opacity-0" />
+							<IconFlag
+								className={`h-6 w-6 ${text.flag ? "opacity-100" : "opacity-0"}`}
+							/>
 						</TableCell>
 					</TableRow>
 				))}
