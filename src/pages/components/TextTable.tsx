@@ -15,7 +15,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 const TextTable = ({ texts = [] }: TextProps) => {
-	console.table(texts);
 	const router = useRouter();
 
 	if (texts.length === 0) {
