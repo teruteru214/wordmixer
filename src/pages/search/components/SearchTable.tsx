@@ -9,12 +9,12 @@ import {
 } from "@/components/Ui/Table";
 import reading from "@/public/reading.webp";
 import type { TextProps } from "@/types/text";
-import { IconFileTextAi, IconFlag } from "@tabler/icons-react";
+import { IconFileTextAi } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const TextTable = ({ texts = [] }: TextProps) => {
+const SearchTable = ({ texts = [] }: TextProps) => {
 	const router = useRouter();
 
 	if (texts.length === 0) {
@@ -40,10 +40,9 @@ const TextTable = ({ texts = [] }: TextProps) => {
 		<Table>
 			<TableHeader>
 				<TableRow>
-					<TableHead className="w-3/4 md:w-2/3">Words</TableHead>
-					<TableHead className="hidden md:table-cell">Level</TableHead>
-					<TableHead className="hidden md:table-cell">Theme</TableHead>
-					<TableHead>Flag</TableHead>
+					<TableHead className="w-3/4 sm:w-2/3">Words</TableHead>
+					<TableHead className="hidden sm:table-cell">Level</TableHead>
+					<TableHead className="hidden sm:table-cell">Theme</TableHead>
 				</TableRow>
 			</TableHeader>
 			<TableBody>
@@ -56,13 +55,8 @@ const TextTable = ({ texts = [] }: TextProps) => {
 						<TableCell className="max-w-[18rem] truncate">
 							{text?.words.map((word) => `#${word}`).join(" ")}
 						</TableCell>
-						<TableCell className="hidden md:table-cell">{text.level}</TableCell>
-						<TableCell className="hidden md:table-cell">{text.theme}</TableCell>
-						<TableCell>
-							<IconFlag
-								className={`h-6 w-6 ${text.flag ? "opacity-100" : "opacity-0"}`}
-							/>
-						</TableCell>
+						<TableCell className="hidden sm:table-cell">{text.level}</TableCell>
+						<TableCell className="hidden sm:table-cell">{text.theme}</TableCell>
 					</TableRow>
 				))}
 			</TableBody>
@@ -70,4 +64,4 @@ const TextTable = ({ texts = [] }: TextProps) => {
 	);
 };
 
-export default TextTable;
+export default SearchTable;

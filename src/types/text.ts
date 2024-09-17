@@ -13,6 +13,7 @@ export interface Text {
 	words: string[];
 	level: string;
 	theme: string;
+	flag: boolean;
 }
 export interface TextProp {
 	text: Text;
@@ -34,6 +35,7 @@ interface TranslationText {
 	words: string[];
 	level: string;
 	theme: string;
+	flag: boolean;
 }
 
 export interface TranslationTextProps {

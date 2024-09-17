@@ -54,6 +54,7 @@ export default async function handler(
 						theme: true,
 					},
 				},
+				flags: true,
 			},
 			orderBy: {
 				id: "desc",
@@ -68,6 +69,7 @@ export default async function handler(
 			words: text.textWords.map((tw) => tw.word.word),
 			level: text.textLevels[0]?.level?.level || "",
 			theme: text.textThemes[0]?.theme?.theme || "",
+			flag: text.flags.length > 0,
 		}));
 
 		return res.status(200).json({
