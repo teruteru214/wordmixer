@@ -30,6 +30,7 @@ export default async function handler(
 						theme: true,
 					},
 				},
+				flags: true,
 			},
 		});
 
@@ -46,6 +47,7 @@ export default async function handler(
 			theme:
 				textData.textThemes.map((themeObj) => themeObj.theme.theme)[0] || "N/A",
 			words: textData.textWords.map((wordObj) => wordObj.word.word),
+			flag: textData.flags.length > 0, // Flagが存在するかどうか
 		};
 
 		res.status(200).json(formattedData);

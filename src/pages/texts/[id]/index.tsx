@@ -118,7 +118,7 @@ const ModelSentence = ({ textData }: TranslationTextProps) => {
 						</audio>
 					</div>
 				</div>
-				<Translation ja={textData.ja} />
+				<Translation id={textData.id} ja={textData.ja} flag={textData.flag} />
 				<Accordion type="single" collapsible className="w-full">
 					<AccordionItem value="item-1">
 						<AccordionTrigger>使われた英単語・レベル・テーマ</AccordionTrigger>
