@@ -1,12 +1,9 @@
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/Ui/Accordion";
+import {} from "@/components/Ui/Accordion";
 import type { TranslationTextProps } from "@/types/text";
 import type { GetStaticProps } from "next";
+import {} from "react";
 import AudioRecorder from "./components/AudioRecorder";
+import Material from "./components/Material";
 import Speech from "./components/Speech";
 import Translation from "./components/Translation";
 
@@ -20,18 +17,11 @@ const ModelSentence = ({ textData }: TranslationTextProps) => {
 					<AudioRecorder />
 				</div>
 				<Translation id={textData.id} ja={textData.ja} flag={textData.flag} />
-				<Accordion type="single" collapsible className="w-full">
-					<AccordionItem value="item-1">
-						<AccordionTrigger>使われた英単語・レベル・テーマ</AccordionTrigger>
-						<AccordionContent>
-							<ul className="ml-2 space-y-2">
-								<li>英単語: {textData.words.join(", ")}</li>
-								<li>レベル: {textData.level}</li>
-								<li>テーマ: {textData.theme}</li>
-							</ul>
-						</AccordionContent>
-					</AccordionItem>
-				</Accordion>
+				<Material
+					words={textData.words}
+					level={textData.level}
+					theme={textData.theme}
+				/>
 			</div>
 		</div>
 	);
