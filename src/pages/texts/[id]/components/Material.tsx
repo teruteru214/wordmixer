@@ -12,13 +12,13 @@ interface MaterialProps {
 	theme: string;
 }
 
-const Material = ({ words, level, theme }: MaterialProps) => {
+const Material = ({ words = [], level, theme }: MaterialProps) => {
 	const [translatedWords, setTranslatedWords] = useState<{
 		[key: string]: string;
 	}>({});
 
-	if (typeof window !== "undefined") {
-		useEffect(() => {
+	useEffect(() => {
+		if (words.length > 0) {
 			const translateWords = async () => {
 				try {
 					const response = await fetch("/api/texts/words", {
@@ -31,12 +31,11 @@ const Material = ({ words, level, theme }: MaterialProps) => {
 
 					const data = await response.json();
 
-					const translations = words.reduce(
-						(acc, word, index) => {
-							acc[word] = data.translations[index].text;
-							return acc;
-						},
-						{} as { [key: string]: string },
+					const translations = Object.fromEntries(
+						words.map((word, index) => [
+							word,
+							data.translations[index]?.text || "翻訳失敗",
+						]),
 					);
 
 					setTranslatedWords(translations);
@@ -46,7 +45,11 @@ const Material = ({ words, level, theme }: MaterialProps) => {
 			};
 
 			translateWords();
-		}, [words]);
+		}
+	}, [words]);
+
+	if (!words || words.length === 0) {
+		return <p>英単語のデータがありません。</p>;
 	}
 
 	return (

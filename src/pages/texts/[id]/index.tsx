@@ -1,7 +1,5 @@
-import {} from "@/components/Ui/Accordion";
 import type { TranslationTextProps } from "@/types/text";
 import type { GetStaticProps } from "next";
-import {} from "react";
 import AudioRecorder from "./components/AudioRecorder";
 import Material from "./components/Material";
 import Speech from "./components/Speech";
