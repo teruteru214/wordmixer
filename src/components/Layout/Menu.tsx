@@ -5,7 +5,6 @@ import {
 	TooltipTrigger,
 } from "@/components/Ui/Tooltip";
 import {
-	IconCards,
 	IconChartBar,
 	IconFileTextAi,
 	IconHome,
@@ -24,7 +23,7 @@ const Menu = () => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger asChild>
-							<Link href="/">
+							<Link href="/user">
 								<IconHome className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
 							</Link>
 						</TooltipTrigger>
@@ -66,18 +65,6 @@ const Menu = () => {
 						</TooltipTrigger>
 						<TooltipContent>
 							<p className="text-gray-400">メモ</p>
-						</TooltipContent>
-					</Tooltip>
-				</TooltipProvider>
-				<TooltipProvider>
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Link href="/user/words">
-								<IconCards className="h-7 w-7 text-sm text-gray-400 cursor-pointer hover:bg-gray-100 [stroke-width:1]" />
-							</Link>
-						</TooltipTrigger>
-						<TooltipContent>
-							<p className="text-gray-400">単語帳</p>
 						</TooltipContent>
 					</Tooltip>
 				</TooltipProvider>
