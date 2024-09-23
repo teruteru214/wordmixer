@@ -13,11 +13,6 @@ enum UserRole {
   STANDARD
   ADMIN
 }
-
-enum TranslationType {
-  ja
-  en
-}
 model User {
   id           Int      @id @default(autoincrement())
   name         String
@@ -30,13 +25,13 @@ model User {
 }
 
 model Memo {
-  userId  Int
-  textId  Int
-  memo    String
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  text    Text     @relation(fields: [textId], references: [id], onDelete: Cascade)
-
-  @@id([userId, textId])
+  id     Int    @id @default(autoincrement())
+  userId Int
+  textId Int
+  answer String
+  memo   String
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  text   Text    @relation(fields: [textId], references: [id], onDelete: Cascade)
 }
 
 model Flag {
